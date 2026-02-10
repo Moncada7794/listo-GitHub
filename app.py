@@ -274,6 +274,7 @@ def wompi_webhook():
     data = request.json
 
     if data.get("estado") == "APROBADO":
+        pass
         # guardar reserva en SQLite
 
 

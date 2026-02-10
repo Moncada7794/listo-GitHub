@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="tours-section">
+    <h1 class="tours-title">Explore Our Tours</h1>
+
+    <div class="tours-grid">
+        {% for tour in tours %}
+        <article class="tour-card">
+
+            <div class="tour-image"
+                 style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
+            </div>
+
+            <div class="tour-content">
+                <h2 class="tour-name">{{ tour.name }}</h2>
+
+                <p class="tour-price">{{ tour.price }}</p>
+
+                <a class="tour-btn" href="/tours/{{ tour.id }}">
+                    View details
+                </a>
+            </div>
+
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

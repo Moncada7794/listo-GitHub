@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="tour-detail">
+
+    <!-- HERO IMAGE -->
+    <img
+        src="{{ url_for('static', filename='images/' ~ tour.image) }}"
+        style="width:100%; height:55vh; object-fit:cover;"
+    >
+
+    <div class="tour-container">
+
+        <h1>{{ tour.name }}</h1>
+        <p class="tour-description">{{ tour.description }}</p>
+
+        <!-- SELECTOR DE PERSONAS -->
+        <div style="margin:20px 0;">
+            <label><strong>Number of people:</strong></label><br>
+
+            <select id="people" style="padding:8px; margin-top:8px;">
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+                <option value="4">4 people</option>
+                <option value="5">5+ people</option>
+            </select>
+        </div>
+
+        <!-- TOTAL -->
+        <p id="total-price" style="font-size:1.2rem; font-weight:bold;">
+            Total: —
+        </p>
+
+        <!-- BOTONES -->
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:30px;">
+            <button id="pay-btn" class="tour-btn">Pay now</button>
+            <a id="whatsapp-btn" class="tour-btn" target="_blank">Chat on WhatsApp</a>
+        </div>
+
+        <h2>Itinerary</h2>
+        <ul>
+            {% for item in tour.itinerary %}
+            <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Included</h2>
+        <ul>
+            {% for item in tour.included %}
+            <li>✔ {{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Not included</h2>
+        <ul>
+            {% for item in tour.not_included %}
+            <li>✖ {{ item }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- CALENDARIO -->
+        <h2 style="margin-top:40px;">Select your date</h2>
+        <div id="calendar"></div>
+
+    </div>
+</section>
+
+
+<!-- FULLCALENDAR -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+
+    const pricing = {{ tour.pricing | tojson }};
+    const tourId = {{ tour.id }};
+    const tourName = "{{ tour.name }}";
+
+    const peopleSelect = document.getElementById("people");
+    const totalText = document.getElementById("total-price");
+    const whatsappBtn = document.getElementById("whatsapp-btn");
+    const payBtn = document.getElementById("pay-btn");
+
+    let selectedDate = null;
+
+    /* ========= TOTAL DINÁMICO ========= */
+
+    function calculateTotal() {
+        const people = parseInt(peopleSelect.value);
+        return (people === 1) ? pricing.one : pricing.group * people;
+    }
+
+    function updateUI() {
+        const people = parseInt(peopleSelect.value);
+        const total = calculateTotal();
+
+        totalText.textContent = `Total: $${total} USD (${people} people)`;
+
+        const message =
+            `Hello! I want to book the "${tourName}" tour for ${people} people. Total price: $${total} USD.`;
+
+        whatsappBtn.href =
+            `https://wa.me/50361116916?text=${encodeURIComponent(message)}`;
+    }
+
+    peopleSelect.addEventListener("change", updateUI);
+    updateUI();
+
+
+    /* ========= CALENDARIO ========= */
+
+    const response = await fetch(`/api/bookings/${tourId}`);
+    const bookings = await response.json();
+
+    const events = bookings.map(b => ({
+        title: "Booked",
+        start: b.date,
+        color: "#e53935"
+    }));
+
+    const calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
+    initialView: "dayGridMonth",
+    events: events,
+
+    validRange: {
+        start: new Date().toISOString().split("T")[0]
+    },
+
+        dateClick: function(info) {
+            selectedDate = info.dateStr;
+            alert("Selected date: " + selectedDate);
+        }
+    });
+
+    calendar.render();
+
+
+    /* ========= PAGO WOMPI ========= */
+
+    payBtn.addEventListener("click", async () => {
+
+        if (!selectedDate) {
+            alert("Please select a date first.");
+            return;
+        }
+
+        const people = parseInt(peopleSelect.value);
+        const total = calculateTotal();
+
+        const email = prompt("Enter your email for payment:");
+        if (!email) return;
+
+        const res = await fetch("/create-payment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                amount: total,
+                email: email,
+                tour_id: tourId,
+                date: selectedDate,
+                people: people
+            })
+        });
+
+        const data = await res.json();
+
+        /* REDIRECCIÓN CORRECTA A WOMPI */
+        if (data.checkout_url) {
+            window.location.href = data.checkout_url;
+        } else {
+            alert("Error creating payment");
+            console.log(data);
+        }
+    });
+
+});
+</script>
+
+{% endblock %}

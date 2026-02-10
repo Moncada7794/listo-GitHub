@@ -1,0 +1,41 @@
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+
+    const tourId = 1; // o dinámico
+    const response = await fetch(`/api/bookings/${tourId}`);
+    const bookings = await response.json();
+
+    // convertir reservas a eventos bloqueados
+    const events = bookings.map(b => ({
+        title: "Booked",
+        start: b.date,
+        display: "background",
+        color: "#e53935"
+    }));
+
+    const calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
+        initialView: "dayGridMonth",
+        events: events,
+
+        //  bloquear fechas pasadas
+        validRange: {
+            start: new Date().toISOString().split("T")[0]
+        },
+
+        //  impedir seleccionar fechas reservadas
+        dateClick: function(info) {
+
+            const isBooked = bookings.some(b => b.date === info.dateStr);
+
+            if (isBooked) {
+                alert("This date is already booked.");
+                return;
+            }
+
+            alert("Selected date: " + info.dateStr);
+        }
+    });
+
+    calendar.render();
+});
+</script>

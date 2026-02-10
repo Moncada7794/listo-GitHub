@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiking El Salvador</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+    <div class="top-left">
+        Hiking El Salvador
+    </div>
+
+    <div class="top-right">
+        
+    </div>
+</div>
+
+<!-- HEADER PRINCIPAL -->
+<header class="main-header">
+    <nav class="main-nav">
+        <nav class="main-nav">
+        <a href="/">Home</a>
+        <a href="/tours">Tours</a>
+        <a href="/calendar">Availability</a>
+        <a href="/gallery">Gallery</a>
+    </nav>
+</header>
+
+<!-- CONTENIDO DINÁMICO -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+    <p>© 2026 Hiking El Salvador · El Salvador</p>
+
+    <p>
+        <a href="https://wa.me/50361116916" target="_blank">
+            📲 Book via WhatsApp
+        </a>
+    </p>
+</footer>
+
+</body>
+</html>
+

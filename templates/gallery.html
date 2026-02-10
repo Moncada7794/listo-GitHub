@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Galería de Tours</h2>
+
+<div>
+    <img src="{{ url_for('static', filename='images/tour1.jpg') }}" width="300">
+    <img src="{{ url_for('static', filename='images/tour2.jpg') }}" width="300">
+    <img src="{{ url_for('static', filename='images/tour3.jpg') }}" width="300">
+</div>
+
+<p>
+    Todas las imágenes corresponden a experiencias reales
+    con nuestros clientes.
+</p>
+
+{% endblock %}

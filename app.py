@@ -26,6 +26,13 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+database_url = os.getenv("DATABASE_URL")
+
+if database_url:
+    database_url = database_url.replace("postgresql://", "postgresql+psycopg://")
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+
 #Crear modelo de reservas
 
 class Booking(db.Model):

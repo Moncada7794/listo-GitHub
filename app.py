@@ -26,11 +26,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-# Crear base  de datos
-
-with app.app_context():
-    db.create_all()
-
 #Crear modelo de reservas
 
 class Booking(db.Model):
@@ -39,6 +34,14 @@ class Booking(db.Model):
     date = db.Column(db.String(50), nullable=False)
     people = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(120), nullable=False)
+
+# Crear base  de datos
+
+with app.app_context():
+    db.create_all()
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 #coneccion API para wompi
 

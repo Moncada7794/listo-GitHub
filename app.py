@@ -19,13 +19,17 @@ load_dotenv()
 # Inicialización de la aplicación Flask
 app = Flask(__name__)
 
-
 #connecion a base de dato
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+
+# Crear base  de datos
+
+with app.app_context():
+    db.create_all()
 
 #Crear modelo de reservas
 

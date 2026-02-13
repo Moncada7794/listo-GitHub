@@ -1,41 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Availability</title>
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .error {
+            text-align: center;
+            margin-top: 60px;
+            color: #e53935;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Tour Availability</h1>
+
+<div id="calendar"></div>
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
 <script>
 document.addEventListener("DOMContentLoaded", async function () {
 
-    const tourId = 1; // o dinámico
-    const response = await fetch(`/api/bookings/${tourId}`);
-    const bookings = await response.json();
+    try {
+        const tourId = 1;
 
-    // convertir reservas a eventos bloqueados
-    const events = bookings.map(b => ({
-        title: "Booked",
-        start: b.date,
-        display: "background",
-        color: "#e53935"
-    }));
+        const response = await fetch(`/api/bookings/${tourId}`);
 
-    const calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
-        initialView: "dayGridMonth",
-        events: events,
-
-        //  bloquear fechas pasadas
-        validRange: {
-            start: new Date().toISOString().split("T")[0]
-        },
-
-        //  impedir seleccionar fechas reservadas
-        dateClick: function(info) {
-
-            const isBooked = bookings.some(b => b.date === info.dateStr);
-
-            if (isBooked) {
-                alert("This date is already booked.");
-                return;
-            }
-
-            alert("Selected date: " + info.dateStr);
+        if (!response.ok) {
+            throw new Error("API response failed");
         }
-    });
 
-    calendar.render();
+        const bookings = await response.json();
+
+        // convertir reservas a eventos bloqueados
+        const events = bookings.map(b => ({
+            title: "Booked",
+            start: b.date,
+            display: "background",
+            color: "#e53935"
+        }));
+
+        const calendarEl = document.getElementById("calendar");
+
+        if (!calendarEl) {
+            throw new Error("Calendar container not found");
+        }
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: "dayGridMonth",
+            height: "auto",
+            events: events,
+
+            // bloquear fechas pasadas
+            validRange: {
+                start: new Date().toISOString().split("T")[0]
+            },
+
+            // impedir seleccionar fechas reservadas
+            dateClick: function(info) {
+
+                const isBooked = bookings.some(b => b.date === info.dateStr);
+
+                if (isBooked) {
+                    alert("This date is already booked.");
+                    return;
+                }
+
+                alert("Selected date: " + info.dateStr);
+            }
+        });
+
+        calendar.render();
+
+    } catch (err) {
+        console.error("Calendar load error:", err);
+
+        document.body.innerHTML = `
+            <div class="error">
+                Error loading availability calendar.<br>
+                Please try again later.
+            </div>
+        `;
+    }
 });
 </script>
+
+</body>
+</html>

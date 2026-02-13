@@ -33,6 +33,18 @@ if database_url:
 
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 
+# PAra correr localhost y hacer pruebas
+
+"""database_url = os.getenv("DATABASE_URL")
+
+if database_url:
+    database_url = database_url.replace("postgresql://", "postgresql+psycopg://")
+else:
+    database_url = "sqlite:///database.db"  # ← LOCAL
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url"""
+
+
 #Crear modelo de reservas
 
 class Booking(db.Model):

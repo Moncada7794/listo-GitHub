@@ -114,6 +114,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const response = await fetch(`/api/bookings/${tourId}`);
     const bookings = await response.json();
+    const bookings = await response.json();
 
     const events = bookings.map(b => ({
         title: "Booked",

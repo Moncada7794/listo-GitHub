@@ -294,6 +294,8 @@ def payment_success():
         db.session.commit()
 
     return render_template("payment_success.html")
+
+
 @app.route("/wompi-webhook", methods=["POST"])
 
 def wompi_webhook():
@@ -302,6 +304,10 @@ def wompi_webhook():
     if data.get("estado") == "APROBADO":
         pass
         # guardar reserva en SQLite
+
+@app.route("/checkout")
+def checkout():
+    return render_template("checkout.html")
 
 
 # Punto de entrada de la aplicación

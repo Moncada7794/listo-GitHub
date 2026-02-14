@@ -112,31 +112,33 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     /* ========= CALENDARIO ========= */
 
-    const response = await fetch(`/api/bookings/${tourId}`);
-    const bookings = await response.json();
-    const bookings = await response.json();
+    try {
+        const response = await fetch(`/api/bookings/${tourId}`);
+        const bookings = await response.json();
 
-    const events = bookings.map(b => ({
-        title: "Booked",
-        start: b.date,
-        color: "#e53935"
-    }));
+        const events = bookings.map(b => ({
+            title: "Booked",
+            start: b.date,
+            color: "#e53935"
+        }));
 
-    const calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
-    initialView: "dayGridMonth",
-    events: events,
+        const calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
+            initialView: "dayGridMonth",
+            events: events,
+            validRange: {
+                start: new Date().toISOString().split("T")[0]
+            },
+            dateClick: function(info) {
+                selectedDate = info.dateStr;
+                alert("Selected date: " + selectedDate);
+            }
+        });
 
-    validRange: {
-        start: new Date().toISOString().split("T")[0]
-    },
+        calendar.render();
 
-        dateClick: function(info) {
-            selectedDate = info.dateStr;
-            alert("Selected date: " + selectedDate);
-        }
-    });
-
-    calendar.render();
+    } catch (error) {
+        console.error("Error loading calendar:", error);
+    }
 
 
     /* ========= PAGO WOMPI ========= */
@@ -168,7 +170,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         const data = await res.json();
 
-        /* REDIRECCIÓN CORRECTA A WOMPI */
         if (data.checkout_url) {
             window.location.href = data.checkout_url;
         } else {

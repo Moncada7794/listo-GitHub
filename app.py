@@ -9,7 +9,7 @@ Attributes:
 
 import json, datetime, os
 from dotenv import  load_dotenv
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect
 import requests, uuid
 from flask_sqlalchemy import  SQLAlchemy
 
@@ -197,11 +197,30 @@ def gallery():
 
 @app.route("/create-payment", methods=["POST"])
 def create_payment():
-    data = request.json
-    amount = int(data["amount"])
+
+    # --- datos del formulario ---
+    tour_id = request.form.get("tour_id")
+    date = request.form.get("date")
+    people = int(request.form.get("people"))
+
+    name = request.form.get("name")
+    phone = request.form.get("phone")
+    email = request.form.get("email")
+
+    pickup = request.form.get("pickup")
+    pickup_location = request.form.get("pickup_location")
+
+    # --- precios ---
+    price_one = 120
+    price_group = 100
+
+    total = price_one if people == 1 else price_group * people
+
+    if pickup == "yes":
+        total += 49.99
 
     try:
-        #  Obtener token OAuth
+        # 🔐 Obtener token OAuth
         auth_response = requests.post(
             os.getenv("WOMPI_AUTH"),
             headers={"Content-Type": "application/x-www-form-urlencoded"},
@@ -219,7 +238,7 @@ def create_payment():
         if not access_token:
             return jsonify({"error": "No access_token", "details": token_data}), 400
 
-        #  Crear enlace de pago CORRECTO
+        #  Crear enlace de pago en Wompi
         payment_response = requests.post(
             f"{os.getenv('WOMPI_API')}/EnlacePago",
             headers={
@@ -228,21 +247,21 @@ def create_payment():
             },
             json={
                 "nombreProducto": "Reserva Cotuzas Tours",
-                "descripcionProducto": f"Tour {data['tour_id']} - {data['people']} personas",
-                "identificadorEnlaceComercio": f"tour-{data['tour_id']}-{data['date']}",
-                "monto": amount,
+                "descripcionProducto": f"Tour {tour_id} - {people} personas",
+                "identificadorEnlaceComercio": f"tour-{tour_id}-{date}",
+                "monto": total,
                 "moneda": "USD",
                 "cantidadDisponible": 1,
                 "vigencia": {
                     "tipo": "MINUTOS",
                     "valor": 1440
                 },
-                "urlRedirect": "http://localhost:5000/payment-success"
+                # ⚠ IMPORTANTE: cambiar localhost por tu dominio real
+                "urlRedirect": "https://hikingelsalvador.com/payment-success"
             }
         )
 
         payment_data = payment_response.json()
-
         print("WOMPI RESPONSE:", payment_data)
 
         url_pago = payment_data.get("urlEnlace")
@@ -253,7 +272,8 @@ def create_payment():
                 "details": payment_data
             }), 400
 
-        return jsonify({"checkout_url": url_pago})
+        #  REDIRECCIÓN REAL (no JSON)
+        return redirect(url_pago)
 
     except Exception as e:
         return jsonify({"error": "Exception", "details": str(e)}), 500

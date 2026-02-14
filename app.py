@@ -305,9 +305,20 @@ def wompi_webhook():
         pass
         # guardar reserva en SQLite
 
+
+
 @app.route("/checkout")
 def checkout():
-    return render_template("checkout.html")
+    tour_id = request.args.get("tour_id")
+    date = request.args.get("date")
+    people = request.args.get("people")
+
+    return render_template(
+        "checkout.html",
+        tour_id=tour_id,
+        date=date,
+        people=people
+    )
 
 
 # Punto de entrada de la aplicación

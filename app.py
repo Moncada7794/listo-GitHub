@@ -107,7 +107,8 @@ def home():
     Returns:
         str: HTML renderizado de la página index.html.
     """
-    return render_template("index.html")
+    tours_data = load_tours()
+    return render_template("index.html", tours=tours_data)
 
 
 @app.route("/tours")

@@ -14,29 +14,7 @@
         <h1>{{ tour.name }}</h1>
         <p class="tour-description">{{ tour.description }}</p>
 
-        <!-- SELECTOR DE PERSONAS -->
-        <div style="margin:20px 0;">
-            <label><strong>Number of people:</strong></label><br>
-
-            <select id="people" style="padding:8px; margin-top:8px;">
-                <option value="1">1 person</option>
-                <option value="2">2 people</option>
-                <option value="3">3 people</option>
-                <option value="4">4 people</option>
-                <option value="5">5+ people</option>
-            </select>
-        </div>
-
-        <!-- TOTAL -->
-        <p id="total-price" style="font-size:1.2rem; font-weight:bold;">
-            Total: —
-        </p>
-
-        <!-- BOTONES -->
-        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:30px;">
-            <button id="pay-btn" class="tour-btn">Pay now</button>
-            <a id="whatsapp-btn" class="tour-btn" target="_blank">Chat on WhatsApp</a>
-        </div>
+      
 
         <h2>Itinerary</h2>
         <ul>
@@ -58,6 +36,28 @@
             <li>✖ {{ item }}</li>
             {% endfor %}
         </ul>
+   
+              <div id="booking-section" class="booking-panel">
+            <label><strong>Number of people:</strong></label><br>
+
+            <select id="people" style="padding:8px; margin-top:8px;">
+                <option value="1">1 person</option>
+                <option value="2">2 people</option>
+                <option value="3">3 people</option>
+                <option value="4">4 people</option>
+                <option value="5">5+ people</option>
+            </select>
+
+            <p id="total-price" style="font-size:1.2rem; font-weight:bold; margin:12px 0;">
+                Total: —
+            </p>
+
+            <div class="booking-actions">
+                <button id="pay-btn" class="tour-btn">Pay now</button>
+                <a id="whatsapp-btn" class="tour-btn" target="_blank">Chat on WhatsApp</a>
+            </div>
+
+
 
         <!-- CALENDARIO -->
         <h2 style="margin-top:40px;">Select your date</h2>

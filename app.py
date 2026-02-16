@@ -8,18 +8,17 @@ Attributes:
 """
 
 import json, datetime, os
-from dotenv import  load_dotenv
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, redirect
 import requests, uuid
-from flask_sqlalchemy import  SQLAlchemy
-
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
 # Inicialización de la aplicación Flask
 app = Flask(__name__)
 
-#connecion a base de dato
+# connecion a base de dato
 
 app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -45,7 +44,7 @@ else:
 app.config["SQLALCHEMY_DATABASE_URI"] = database_url"""
 
 
-#Crear modelo de reservas
+# Crear modelo de reservas
 
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -53,6 +52,7 @@ class Booking(db.Model):
     date = db.Column(db.String(50), nullable=False)
     people = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(120), nullable=False)
+
 
 # Crear base  de datos
 
@@ -62,8 +62,7 @@ with app.app_context():
 if __name__ == "__main__":
     app.run(debug=True)
 
-#coneccion API para wompi
-
+# coneccion API para wompi
 
 
 WOMPI_PUBLIC_KEY = os.getenv("WOMPI_PUBLIC_KEY")
@@ -97,7 +96,6 @@ def load_bookings():
 def save_bookings(bookings):
     with open("data/bookings.json", "w", encoding="utf-8") as f:
         json.dump(bookings, f, indent=2)
-        
 
 
 @app.route("/")
@@ -107,7 +105,8 @@ def home():
     Returns:
         str: HTML renderizado de la página index.html.
     """
-    return render_template("index.html")
+    tours_data = load_tours()
+    return render_template("index.html", tours=tours_data)
 
 
 @app.route("/tours")
@@ -155,6 +154,7 @@ def calendar():
     """
     return render_template("calendar.html")
 
+
 @app.route("/api/book", methods=['POST'])
 def book():
     data = request.json
@@ -170,7 +170,8 @@ def book():
     bookings.append(new_booking)
     save_bookings(bookings)
 
-    return jsonify({"status":"ok"})
+    return jsonify({"status": "ok"})
+
 
 @app.route("/api/bookings/<int:tour_id>")
 def get_bookings(tour_id):
@@ -194,10 +195,8 @@ def gallery():
     return render_template("gallery.html")
 
 
-
 @app.route("/create-payment", methods=["POST"])
 def create_payment():
-
     # --- datos del formulario ---
     tour_id = request.form.get("tour_id")
     date = request.form.get("date")
@@ -256,7 +255,7 @@ def create_payment():
                     "tipo": "MINUTOS",
                     "valor": 1440
                 },
-                # ⚠ IMPORTANTE: cambiar localhost por tu dominio real
+                #  IMPORTANTE: cambiar localhost por  dominio real
                 "urlRedirect": "https://hikingelsalvador.com/payment-success"
             }
         )
@@ -279,7 +278,6 @@ def create_payment():
         return jsonify({"error": "Exception", "details": str(e)}), 500
 
 
-
 @app.route("/payment-success")
 def payment_success():
     transaction_id = request.args.get("id")
@@ -297,7 +295,6 @@ def payment_success():
 
     # Verificar que el pago fue aprobado
     if data.get("data", {}).get("status") == "APPROVED":
-
         # Aquí recuperamos lo que guardaste en reference
         reference_data = data["data"]["reference"]
 
@@ -317,14 +314,12 @@ def payment_success():
 
 
 @app.route("/wompi-webhook", methods=["POST"])
-
 def wompi_webhook():
     data = request.json
 
     if data.get("estado") == "APROBADO":
         pass
         # guardar reserva en SQLite
-
 
 
 @app.route("/checkout")

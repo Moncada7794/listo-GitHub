@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <section class="hero">
@@ -7,60 +6,45 @@
 
     <div class="hero-content">
 
-    <h1>
+        <h1>
             Experience the Magic of <br>
             <span class="highlight">El Salvador</span>
         </h1>
- <p class="hero-description">
-            Discover volcanoes, hidden beaches, colorful towns and unforgettable
-            adventures with trusted local guides.
-            Private, safe and fully personalized tours designed for travelers
-            who want the real El Salvador.
-        </p>
 
-        <p class="hero-features">
-            🌋 Volcano hikes & breathtaking views •
-            🏝️ Secret beaches & nature escapes •
-            🚐 Safe transport & flexible dates
+        <p class="hero-description">
+            Private volcano hikes, hidden beaches and unforgettable adventures
+            with trusted local guides.
         </p>
 
         <div class="hero-actions">
-            <a href="/tours" class="hero-btn">
-                Start Your Adventure
-            </a>
+            <a href="/tours" class="hero-btn">Explore Tours</a>
         </div>
 
-        <div class="hero-social">
-            <span>Trusted by international travelers</span><br>
-            Follow us:
-            <a href="https://www.instagram.com/cotuzastours" target="_blank">Instagram</a> |
-            <a href="https://www.facebook.com/people/Cotuzas-Tours/61565720485597/" target="_blank">Facebook</a>
-        </div>
-
-        {% if tours is defined and tours %}
+        {% if tours %}
         <div class="home-tours-grid">
             {% for tour in tours %}
-            <article class="tour-card home-tour-card">
+            <div class="home-tour-card">
+
                 <div class="tour-image"
                      style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
                 </div>
 
                 <div class="tour-content">
-                    <h2 class="tour-name">{{ tour.name }}</h2>
+                    <div class="tour-name">{{ tour.name }}</div>
+
+                    <div class="tour-price">
+                        From ${{ tour.pricing.one }} USD
+                    </div>
 
                     <a class="tour-btn" href="/tours/{{ tour.id }}#booking-section">
                         View details
                     </a>
                 </div>
-            </article>
+
+            </div>
             {% endfor %}
         </div>
-        {% else %}
-        <div class="hero-actions">
-            <a href="/tours" class="hero-btn">View all available tours</a>
-        </div>
         {% endif %}
-
 
     </div>
 </section>

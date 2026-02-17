@@ -1,295 +1,94 @@
-/* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* =====================================================
+   MEJORAS PROFESIONALES HOME (NO ROMPE TU DISEÑO)
+   ===================================================== */
 
-body {
-    font-family: Arial, sans-serif;
-}
-
-/* ================= HEADER & NAV ================= */
-
-.top-bar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 64px;
-
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.65),
-        rgba(0, 0, 0, 0.85)
-    );
-
-    backdrop-filter: blur(6px);
-
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 32px;
-    z-index: 200;
-}
-
-.main-header {
-    position: fixed;
-    top: 64px;
-    width: 100%;
-    padding: 16px 32px;
-
-    background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(6px);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    z-index: 150;
-}
-
-.main-nav a {
-    color: white;
-    margin: 0 14px;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.main-nav a:hover {
-    opacity: 0.7;
-}
-
-/* ================= HERO ================= */
-
+/* HERO más equilibrado */
 .hero {
-    position: relative;
-    height: 100vh;
-    padding-top: 140px;
-
-    background-image: url("/static/images/hero.jpg");
-    background-size: cover;
-    background-position: center;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* ← CLAVE */
+    min-height: 110vh;
 }
 
 .hero-overlay {
-    position: absolute;
-    inset: 0;
     background: linear-gradient(
         to bottom,
-        rgba(0, 0, 0, 0.45),
-        rgba(0, 0, 0, 0.75)
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.88)
     );
 }
 
 .hero-content {
-    position: relative;
-    color: white;
-    text-align: center;              /* ← centrado correcto */
-    max-width: 900px;
-    width: 95%;
-    padding: 0 20px 30px;
-    margin: 120px auto 0;            /* ← BAJA TODO PERFECTO */
+    margin-top: 140px;
 }
 
-.hero-content h1 {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    font-weight: 800;
-    line-height: 1.1;
-}
-
-.hero-description {
-    font-size: 1.3rem;
-    margin-bottom: 25px;
-    line-height: 1.5;
-}
-
-.hero-features {
-    font-size: 1rem;
-    opacity: 0.9;
-    margin-bottom: 35px;
-}
-
-/* CTA */
-.hero-actions {
-    margin-bottom: 18px;
-}
-
-.hero-btn {
-    display: inline-block;
-    padding: 16px 40px;
-    background: #e53935;
-    color: white;
-    text-decoration: none;
-    border-radius: 999px;
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-.hero-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(229, 57, 53, 0.35);
-    background: #ff4a46;
-}
-
-/* SOCIAL */
-.hero-social {
-    margin-top: 8px;
-    font-size: 0.95rem;
-    margin-bottom: 22px; /* ← MÁS ESPACIO */
-}
-
-.hero-social a {
-    color: white;
-    text-decoration: underline;
-    margin: 0 6px;
-}
-
-/* ===== TOURS EN HOME ===== */
-
-.home-tours-grid {
-    margin: 50px auto 0;
-    max-width: 1100px;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 22px;
-
-    justify-items: center;
-    padding: 0 12px;
-}
+/* ===== CARDS PREMIUM ===== */
 
 .home-tour-card {
-    width: 100%;
-    max-width: 260px;
+    background: rgba(255,255,255,0.12); /* glass */
+    backdrop-filter: blur(12px);
 
-    background: rgba(255,255,255,0.95); /* fondo clarito para texto */
-    border-radius: 14px;
-    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.18);
 
-    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
 }
 
 .home-tour-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 48px rgba(0,0,0,0.25);
+    transform: translateY(-8px);
+    box-shadow: 0 28px 60px rgba(0,0,0,0.55);
 }
 
+/* imagen más elegante */
 .home-tour-card .tour-image {
-    height: 160px;
-    background-size: cover;
-    background-position: center;
+    height: 170px;
 }
 
-.home-tour-card .tour-content {
-    padding: 14px 16px 18px;
-    text-align: center;
-}
-
+/* nombre más fuerte */
 .home-tour-card .tour-name {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #111;
+    font-size: 1.05rem;
+    color: #fff;
 }
 
+/* descripción legible sobre glass */
 .home-tour-card .tour-description {
-    font-size: 0.87rem;
-    color: #444;
-    margin-bottom: 14px;
-    min-height: 36px; /* para igualar cards */
+    color: rgba(255,255,255,0.85);
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* solo 2 líneas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    min-height: 40px;
 }
 
+/* botón más premium */
 .home-tour-card .tour-btn {
-    display: inline-block;
-    padding: 8px 20px;
-    font-size: 0.88rem;
-    background: #e53935;
-    color: white;
-    text-decoration: none;
-    border-radius: 999px;
-    font-weight: 600;
-    transition: background 0.2s ease, transform 0.15s ease;
+    padding: 9px 22px;
+    font-weight: 700;
+
+    box-shadow: 0 6px 16px rgba(229,57,53,0.35);
 }
 
 .home-tour-card .tour-btn:hover {
-    background: #d32f2f;
-    transform: translateY(-2px);
-}
-/* ================= TOURS PAGE ================= */
-
-.tours-section {
-    padding: 120px 60px 80px;
-    background: #f7f7f7;
+    box-shadow: 0 10px 26px rgba(229,57,53,0.5);
 }
 
-.tours-title {
-    font-size: 2.5rem;
-    margin-bottom: 60px;
-    text-align: center;
-    color: #111;
+/* ===== GRID mejor centrado ===== */
+
+.home-tours-grid {
+    margin-top: 60px;
 }
 
-.tours-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 32px;
-}
-
-/* ================= FOOTER ================= */
-
-.main-footer {
-    background: #111;
-    color: #ccc;
-    text-align: center;
-    padding: 30px 20px;
-}
-
-/* ================= MOBILE ================= */
+/* ===== MOBILE PREMIUM ===== */
 
 @media (max-width: 768px) {
 
-    .hero {
-        padding-top: 130px;
-        min-height: 100vh;
-    }
-    
-    .home-tours-grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 500px;
-    }
-
     .hero-content {
-        margin: 60px auto 0;          /* ← spacing móvil perfecto */
+        margin-top: 90px;
     }
 
-    .hero-content h1 {
-        font-size: 2.4rem;
+    .home-tour-card {
+        border-radius: 16px;
     }
 
-    .hero-description {
-        font-size: 1.05rem;
-    }
-
-    .hero-features {
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
-
-    .hero-btn {
-        padding: 14px 28px;
-        font-size: 0.95rem;
-    }
-
-    .home-tours-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        margin-top: 30px;
+    .home-tour-card .tour-image {
+        height: 140px;
     }
 }

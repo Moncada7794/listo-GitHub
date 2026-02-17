@@ -2,7 +2,8 @@
 {% block content %}
 
 <section class="tours-section">
-    <h1 class="tours-title">Explore Our Tours</h1>
+
+    <h1 class="tours-title">All Tours in El Salvador</h1>
 
     <div class="tours-grid">
         {% for tour in tours %}
@@ -13,10 +14,13 @@
             </div>
 
             <div class="tour-content">
-                <h2 class="tour-name">{{ tour.name }}</h2>
+                <h3 class="tour-name">{{ tour.name }}</h3>
 
-                a class="tour-btn" href="/tours/{{ tour.id }}#booking-section">
+                <p class="tour-price">
+                    From ${{ tour.pricing.one }} USD
+                </p>
 
+                <a href="/tours/{{ tour.id }}" class="tour-btn">
                     View details
                 </a>
             </div>
@@ -24,6 +28,7 @@
         </article>
         {% endfor %}
     </div>
+
 </section>
 
 {% endblock %}

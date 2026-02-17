@@ -17,43 +17,50 @@ body {
     color: #fff;
 }
 
-/* ================= HEADER ================= */
+/* ================= HEADER PREMIUM ================= */
 
-ి
-.top-bar {
-    position: fixed;
+.site-header {
+    position: absolute;
     top: 0;
     width: 100%;
-    height: 60px;
-    background: rgba(0,0,0,0.75);
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
     z-index: 1000;
-}
 
-.main-header {
-    position: fixed;
-    top: 60px;
-    width: 100%;
-    background: rgba(0,0,0,0.45);
-    backdrop-filter: blur(6px);
     display: flex;
-    justify-content: center;
-    padding: 12px 0;
-    z-index: 999;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 40px;
+
+    background: transparent;
+    transition: all 0.35s ease;
 }
 
-.main-nav a {
-    color: white;
-    margin: 0 16px;
+/* cuando haces scroll */
+.site-header.scrolled {
+    position: fixed;
+    background: rgba(10,14,20,0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 30px rgba(0,0,0,0.4);
+}
+
+/* logo */
+.logo {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* navegación */
+.nav-links a {
+    color: rgba(255,255,255,0.85);
+    margin-left: 26px;
     text-decoration: none;
-    font-weight: 600;
-    transition: opacity .2s ease;
+    font-weight: 500;
+    transition: 0.25s;
 }
 
-.main-nav a:hover {
-    opacity: .7;
+.nav-links a:hover {
+    color: #fff;
 }
 
 /* ================= HERO HOME ================= */

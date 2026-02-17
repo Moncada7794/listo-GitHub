@@ -1,13 +1,64 @@
-/* =====================================================
-   MEJORAS PROFESIONALES HOME (NO ROMPE TU DISEÑO)
-   ===================================================== */
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* HERO más equilibrado */
+body {
+    font-family: Arial, sans-serif;
+    background: #000;
+}
+
+/* ================= HEADER ================= */
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+}
+
+.main-header {
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    z-index: 999;
+}
+
+.main-nav a {
+    color: white;
+    margin: 0 16px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* ================= HERO ================= */
+
 .hero {
+    position: relative;
     min-height: 110vh;
+    background: url("/static/images/hero.jpg") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 140px;
 }
 
 .hero-overlay {
+    position: absolute;
+    inset: 0;
     background: linear-gradient(
         to bottom,
         rgba(0,0,0,0.55),
@@ -16,79 +67,99 @@
 }
 
 .hero-content {
-    margin-top: 140px;
+    position: relative;
+    color: white;
+    text-align: center;
+    max-width: 900px;
+    margin-top: 120px;
+    padding: 0 20px;
 }
 
-/* ===== CARDS PREMIUM ===== */
+.hero-content h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: #e53935;
+    color: white;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* ================= HOME TOURS ================= */
+
+.home-tours-grid {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    max-width: 1100px;
+}
 
 .home-tour-card {
-    background: rgba(255,255,255,0.12); /* glass */
+    background: rgba(255,255,255,0.12);
     backdrop-filter: blur(12px);
-
-    border: 1px solid rgba(255,255,255,0.18);
-
-    box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 18px 48px rgba(0,0,0,0.45);
+    transition: transform .25s ease;
 }
 
 .home-tour-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 28px 60px rgba(0,0,0,0.55);
 }
 
-/* imagen más elegante */
-.home-tour-card .tour-image {
+.tour-image {
     height: 170px;
+    background-size: cover;
+    background-position: center;
 }
 
-/* nombre más fuerte */
-.home-tour-card .tour-name {
+.tour-content {
+    padding: 16px;
+    text-align: center;
+}
+
+.tour-name {
     font-size: 1.05rem;
-    color: #fff;
-}
-
-/* descripción legible sobre glass */
-.home-tour-card .tour-description {
-    color: rgba(255,255,255,0.85);
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;      /* solo 2 líneas */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-
-    min-height: 40px;
-}
-
-/* botón más premium */
-.home-tour-card .tour-btn {
-    padding: 9px 22px;
     font-weight: 700;
-
-    box-shadow: 0 6px 16px rgba(229,57,53,0.35);
+    color: #fff;
+    margin-bottom: 10px;
 }
 
-.home-tour-card .tour-btn:hover {
-    box-shadow: 0 10px 26px rgba(229,57,53,0.5);
+.tour-description {
+    font-size: .9rem;
+    color: rgba(255,255,255,.85);
+    margin-bottom: 14px;
 }
 
-/* ===== GRID mejor centrado ===== */
-
-.home-tours-grid {
-    margin-top: 60px;
+.tour-btn {
+    padding: 8px 20px;
+    background: #e53935;
+    color: white;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: .85rem;
 }
 
-/* ===== MOBILE PREMIUM ===== */
+/* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
-
-    .hero-content {
-        margin-top: 90px;
+    .hero-content h1 {
+        font-size: 2.4rem;
     }
 
-    .home-tour-card {
-        border-radius: 16px;
-    }
-
-    .home-tour-card .tour-image {
-        height: 140px;
+    .home-tours-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }

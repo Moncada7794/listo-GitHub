@@ -153,57 +153,74 @@ body {
 /* ===== TOURS EN HOME ===== */
 
 .home-tours-grid {
-    margin: 40px auto 0;
+    margin: 50px auto 0;
     max-width: 1100px;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
 
     justify-items: center;
+    padding: 0 12px;
 }
 
 .home-tour-card {
     width: 100%;
-    max-width: 240px;
+    max-width: 260px;
 
-    background: white;
-    border-radius: 16px;
+    background: rgba(255,255,255,0.95); /* fondo clarito para texto */
+    border-radius: 14px;
     overflow: hidden;
 
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-    text-align: center;
 }
 
 .home-tour-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.25);
 }
 
 .home-tour-card .tour-image {
-    height: 140px;
+    height: 160px;
     background-size: cover;
     background-position: center;
 }
 
 .home-tour-card .tour-content {
     padding: 14px 16px 18px;
+    text-align: center;
 }
 
 .home-tour-card .tour-name {
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 10px;
-    min-height: 40px;
+    margin-bottom: 8px;
+    color: #111;
+}
+
+.home-tour-card .tour-description {
+    font-size: 0.87rem;
+    color: #444;
+    margin-bottom: 14px;
+    min-height: 36px; /* para igualar cards */
 }
 
 .home-tour-card .tour-btn {
     display: inline-block;
-    padding: 8px 18px;
-    font-size: 0.8rem;
+    padding: 8px 20px;
+    font-size: 0.88rem;
+    background: #e53935;
+    color: white;
+    text-decoration: none;
     border-radius: 999px;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.home-tour-card .tour-btn:hover {
+    background: #d32f2f;
+    transform: translateY(-2px);
 }
 /* ================= TOURS PAGE ================= */
 

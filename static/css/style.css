@@ -19,50 +19,51 @@ body {
 
 /* ================= HEADER PREMIUM ================= */
 
-.site-header {
-    position: absolute;
+/* ===== HEADER LIMPIO PRO ===== */
+
+.main-header {
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: linear-gradient(
+        to bottom,
+        rgba(5,10,18,0.85),
+        rgba(5,10,18,0.35)
+    );
 
-    padding: 18px 40px;
-
-    background: transparent;
-    transition: all 0.35s ease;
-}
-
-/* cuando haces scroll */
-.site-header.scrolled {
-    position: fixed;
-    background: rgba(10,14,20,0.85);
     backdrop-filter: blur(10px);
-    box-shadow: 0 6px 30px rgba(0,0,0,0.4);
 }
 
-/* logo */
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 14px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .logo {
     color: #fff;
     font-weight: 700;
     font-size: 1.1rem;
+    letter-spacing: .5px;
 }
 
-/* navegación */
-.nav-links a {
+.main-nav a {
     color: rgba(255,255,255,0.85);
-    margin-left: 26px;
+    margin-left: 22px;
     text-decoration: none;
-    font-weight: 500;
-    transition: 0.25s;
+    font-weight: 600;
+    transition: .25s;
 }
 
-.nav-links a:hover {
+.main-nav a:hover {
     color: #fff;
 }
-
 /* ================= HERO HOME ================= */
 
 .hero {
@@ -301,4 +302,89 @@ body {
     .tour-hero h1 {
         font-size: 2rem;
     }
+}
+
+/* ===== TOURS PAGE PRO ===== */
+
+.tours-page {
+    padding: 160px 20px 80px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.tours-hero-title {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 50px;
+    color: #fff;
+}
+
+.tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+}
+
+/* CARD */
+
+.tour-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    transition: 0.3s ease;
+}
+
+.tour-card:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* IMAGE */
+
+.tour-img {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* INFO */
+
+.tour-info {
+    padding: 22px;
+    color: #fff;
+}
+
+.tour-info h2 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.tour-meta {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 12px;
+}
+
+.tour-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+/* BUTTON */
+
+.tour-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background: #e53935;
+    color: #fff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.tour-btn:hover {
+    background: #ff4a46;
 }

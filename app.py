@@ -197,29 +197,40 @@ def gallery():
 
 @app.route("/create-payment", methods=["POST"])
 def create_payment():
-    # --- datos del formulario ---
-    tour_id = request.form.get("tour_id")
+    # ---------- datos del formulario ----------
+    tour_id = int(request.form.get("tour_id"))
     date = request.form.get("date")
     people = int(request.form.get("people"))
 
-    name = request.form.get("name")
-    phone = request.form.get("phone")
     email = request.form.get("email")
-
     pickup = request.form.get("pickup")
-    pickup_location = request.form.get("pickup_location")
 
-    # --- precios ---
-    price_one = 120
-    price_group = 100
+    # ---------- cargar tour real ----------
+    tours = load_tours()
+    tour = next((t for t in tours if t["id"] == tour_id), None)
+
+    if not tour:
+        return jsonify({"error": "Tour not found"}), 404
+
+    # ---------- precios dinámicos ----------
+    price_one = tour["price_one"]
+    price_group = tour["price_group"]
 
     total = price_one if people == 1 else price_group * people
 
     if pickup == "yes":
-        total += 49.99
+        total += 50
+
+    # ---------- referencia segura ----------
+    reference_payload = json.dumps({
+        "tour_id": tour_id,
+        "date": date,
+        "people": people,
+        "email": email
+    })
 
     try:
-        # 🔐 Obtener token OAuth
+        # ---------- obtener token ----------
         auth_response = requests.post(
             os.getenv("WOMPI_AUTH"),
             headers={"Content-Type": "application/x-www-form-urlencoded"},
@@ -237,7 +248,7 @@ def create_payment():
         if not access_token:
             return jsonify({"error": "No access_token", "details": token_data}), 400
 
-        #  Crear enlace de pago en Wompi
+        # ---------- crear enlace de pago ----------
         payment_response = requests.post(
             f"{os.getenv('WOMPI_API')}/EnlacePago",
             headers={
@@ -245,17 +256,17 @@ def create_payment():
                 "Content-Type": "application/json"
             },
             json={
-                "nombreProducto": "Reserva Cotuzas Tours",
-                "descripcionProducto": f"Tour {tour_id} - {people} personas",
-                "identificadorEnlaceComercio": f"tour-{tour_id}-{date}",
-                "monto": total,
+                "nombreProducto": tour["name"],
+                "descripcionProducto": f"{people} persona(s) • {date}",
+                "identificadorEnlaceComercio": f"tour-{tour_id}-{uuid.uuid4()}",
+                "monto": round(total, 2),
                 "moneda": "USD",
                 "cantidadDisponible": 1,
+                "referencia": reference_payload,
                 "vigencia": {
                     "tipo": "MINUTOS",
                     "valor": 1440
                 },
-                #  IMPORTANTE: cambiar localhost por  dominio real
                 "urlRedirect": "https://hikingelsalvador.com/payment-success"
             }
         )
@@ -267,11 +278,10 @@ def create_payment():
 
         if not url_pago:
             return jsonify({
-                "error": "No se generó enlace",
+                "error": "No payment link generated",
                 "details": payment_data
             }), 400
 
-        #  REDIRECCIÓN REAL (no JSON)
         return redirect(url_pago)
 
     except Exception as e:
@@ -289,26 +299,24 @@ def payment_success():
         "Authorization": f"Bearer {WOMPI_PRIVATE_KEY}"
     }
 
-    # Consultar transacción en Wompi
     r = requests.get(f"{WOMPI_API}/transactions/{transaction_id}", headers=headers)
     data = r.json()
 
-    # Verificar que el pago fue aprobado
     if data.get("data", {}).get("status") == "APPROVED":
-        # Aquí recuperamos lo que guardaste en reference
-        reference_data = data["data"]["reference"]
+        reference_data = data["data"].get("reference")
 
-        pending = json.loads(reference_data)
+        if reference_data:
+            pending = json.loads(reference_data)
 
-        booking = Booking(
-            tour_id=pending["tour_id"],
-            date=pending["date"],
-            people=pending["people"],
-            email=pending["email"]
-        )
+            booking = Booking(
+                tour_id=pending["tour_id"],
+                date=pending["date"],
+                people=pending["people"],
+                email=pending["email"]
+            )
 
-        db.session.add(booking)
-        db.session.commit()
+            db.session.add(booking)
+            db.session.commit()
 
     return render_template("payment_success.html")
 

@@ -1,23 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="tours-section">
+<section class="tours-page">
 
-    <h1 class="tours-title">All Tours in El Salvador</h1>
+    <h1 class="tours-hero-title">All Tours in El Salvador</h1>
 
     <div class="tours-grid">
+
         {% for tour in tours %}
         <article class="tour-card">
 
-            <div class="tour-image"
+            <div class="tour-img"
                  style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
             </div>
 
-            <div class="tour-content">
-                <h3 class="tour-name">{{ tour.name }}</h3>
+            <div class="tour-info">
+                <h2>{{ tour.name }}</h2>
+
+                <p class="tour-meta">
+                    ⏱ {{ tour.duration or "Full day" }} · 🚐 Pickup included
+                </p>
 
                 <p class="tour-price">
-                    From ${{ tour.pricing.one }} USD
+                    From ${{ tour.price }} USD
                 </p>
 
                 <a href="/tours/{{ tour.id }}" class="tour-btn">
@@ -27,6 +32,7 @@
 
         </article>
         {% endfor %}
+
     </div>
 
 </section>

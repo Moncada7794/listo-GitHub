@@ -11,22 +11,24 @@
 <body>
 
 <!-- TOP BAR -->
-<div class="top-bar">
-    <div>Hiking El Salvador</div>
-</div>
+<header class="main-header">
 
-<!-- NAV -->
-<header class="site-header" id="header">
-    <div class="logo">Hiking El Salvador</div>
+    <div class="nav-container">
 
-    <nav class="nav-links">
-        <a href="/">Home</a>
-        <a href="/tours">Tours</a>
-        <a href="/calendar">Availability</a>
-        <a href="/gallery">Gallery</a>
-    </nav>
+        <div class="logo">
+            Hiking El Salvador
+        </div>
+
+        <nav class="main-nav">
+            <a href="/">Home</a>
+            <a href="/tours">Tours</a>
+            <a href="/calendar">Availability</a>
+            <a href="/gallery">Gallery</a>
+        </nav>
+
+    </div>
+
 </header>
-
 <!-- PAGE CONTENT -->
 <main>
     {% block content %}{% endblock %}

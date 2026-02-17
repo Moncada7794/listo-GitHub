@@ -1,39 +1,56 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-<!-- HERO DEL TOUR -->
+<!-- HERO -->
 <section class="tour-hero"
         style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
+
+    <div class="tour-hero-overlay"></div>
+
+    <div class="tour-hero-content">
+        <h1>{{ tour.name }}</h1>
+        <p class="tour-tagline">{{ tour.description }}</p>
+
+        <div class="tour-cta">
+            <span class="tour-price">From ${{ tour.price }} USD</span>
+            <a href="#booking-section" class="hero-btn">Book now</a>
+        </div>
+    </div>
 </section>
 
-<!-- CONTENIDO -->
-<section class="tour-container">
 
-    <h1>{{ tour.name }}</h1>
-    <p class="tour-description">{{ tour.description }}</p>
+<!-- CONTENT -->
+<section class="tour-container">
 
     <div class="tour-layout">
 
-        <!-- INFORMACIÓN -->
-        <div>
+        <!-- LEFT -->
+        <div class="tour-main">
+
+            <h2>Why you'll love this experience</h2>
+            <ul class="tour-benefits">
+                <li>Private comfortable transportation</li>
+                <li>Bilingual local guide</li>
+                <li>Safe & flexible itinerary</li>
+                <li>Authentic cultural experience</li>
+            </ul>
 
             <h2>Itinerary</h2>
-            <ul>
+            <ul class="tour-list">
                 {% for item in tour.itinerary %}
                     <li>{{ item }}</li>
                 {% endfor %}
             </ul>
 
             <h2>Included</h2>
-            <ul>
+            <ul class="tour-list">
                 {% for item in tour.included %}
                     <li>{{ item }}</li>
                 {% endfor %}
             </ul>
 
             <h2>Not included</h2>
-            <ul>
+            <ul class="tour-list">
                 {% for item in tour.not_included %}
                     <li>{{ item }}</li>
                 {% endfor %}
@@ -41,13 +58,13 @@
 
         </div>
 
-        <!-- CAJA DE RESERVA -->
+
+        <!-- BOOKING BOX -->
         <aside class="booking-box" id="booking-section">
 
-            <h3>Book this tour</h3>
+            <h3>Reserve your spot</h3>
 
             <form action="/create-payment" method="POST">
-
                 <input type="hidden" name="tour_id" value="{{ tour.id }}">
 
                 <label>Date</label>
@@ -63,16 +80,15 @@
                 <label>Pickup</label>
                 <select name="pickup">
                     <option value="no">No pickup</option>
-                    <option value="yes">Hotel pickup + $49.99</option>
+                    <option value="yes"> Airport + $49.99</option>
                 </select>
 
                 <label>Email</label>
                 <input type="email" name="email" required>
 
                 <button class="tour-btn pay" type="submit">
-                    Pay with card
+                    Pay now
                 </button>
-
             </form>
 
             <a class="tour-btn whatsapp"
@@ -80,6 +96,10 @@
                target="_blank">
                Chat on WhatsApp
             </a>
+
+            <p class="trust">
+                ⭐ 5-star experience · Secure payment · 
+            </p>
 
         </aside>
 

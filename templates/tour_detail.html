@@ -77,11 +77,13 @@ const peopleSelect = document.querySelector('select[name="people"]');
 const totalText = document.getElementById("totalPrice");
 
 function updateTotal() {
-    const people = peopleSelect.value;
-    let total = pricing[people];
+    let people = parseInt(peopleSelect.value);
+    let total = 0;
 
-    if (!total) {
-        total = pricing["default"];
+    if (people === 1) {
+        total = pricing.one;
+    } else {
+        total = pricing.group * people;
     }
 
     totalText.innerText = "Total: $" + total + " USD";
@@ -90,5 +92,4 @@ function updateTotal() {
 peopleSelect.addEventListener("change", updateTotal);
 updateTotal();
 </script>
-
 {% endblock %}

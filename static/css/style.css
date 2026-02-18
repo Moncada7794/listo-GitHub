@@ -9,7 +9,7 @@ body{
     font-family:Arial, sans-serif;
     color:#fff;
 
-    /* 🌄 FONDO GLOBAL CONTINUO */
+    /*  FONDO GLOBAL CONTINUO */
     background:
         linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
         url("/static/images/hero.jpg") center/cover fixed no-repeat;
@@ -315,6 +315,12 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
+}
+
+.tour-hero h1,
+.tour-hero p{
+    color:#ffffff;
+    text-shadow:0 4px 18px rgba(0,0,0,.7);
 }
 
 .tour-hero-overlay{

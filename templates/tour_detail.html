@@ -3,107 +3,92 @@
 
 <!-- HERO -->
 <section class="tour-hero"
-        style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
+style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
+<div class="tour-hero-overlay"></div>
 
-    <div class="tour-hero-overlay"></div>
-
-    <div class="tour-hero-content">
-        <h1>{{ tour.name }}</h1>
-        <p class="tour-tagline">{{ tour.description }}</p>
-
-        <div class="tour-cta">
-            <span class="tour-price">From ${{ tour.price }} USD</span>
-            <a href="#booking-section" class="hero-btn">Book now</a>
-        </div>
-    </div>
+<div class="hero-content">
+    <h1>{{ tour.name }}</h1>
+    <p>{{ tour.description }}</p>
+</div>
 </section>
-
 
 <!-- CONTENT -->
 <section class="tour-container">
+<div class="tour-layout">
 
-    <div class="tour-layout">
+<!-- LEFT -->
+<div>
+    <h2>Why you'll love this experience</h2>
 
-        <!-- LEFT -->
-        <div class="tour-main">
+    <h3>Itinerary</h3>
+    <ul>
+        {% for item in tour.itinerary %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
 
-            <h2>Why you'll love this experience</h2>
-            <ul class="tour-benefits">
-                <li>Private comfortable transportation</li>
-                <li>Bilingual local guide</li>
-                <li>Safe & flexible itinerary</li>
-                <li>Authentic cultural experience</li>
-            </ul>
+    <h3>Included</h3>
+    <ul>
+        {% for item in tour.included %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
 
-            <h2>Itinerary</h2>
-            <ul class="tour-list">
-                {% for item in tour.itinerary %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
+    <h3>Not included</h3>
+    <ul>
+        {% for item in tour.not_included %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
 
-            <h2>Included</h2>
-            <ul class="tour-list">
-                {% for item in tour.included %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
+<!-- BOOKING -->
+<aside class="booking-box">
+    <h3>Reserve your spot</h3>
 
-            <h2>Not included</h2>
-            <ul class="tour-list">
-                {% for item in tour.not_included %}
-                    <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
+    <form>
+        <label>Date</label>
+        <input type="date" required>
 
-        </div>
+        <label>People</label>
+        <select name="people">
+            {% for i in range(1, 11) %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select>
 
+        <label>Email</label>
+        <input type="email" required>
 
-        <!-- BOOKING BOX -->
-        <aside class="booking-box" id="booking-section">
+        <p id="totalPrice" style="font-weight:bold;margin:12px 0;"></p>
 
-            <h3>Reserve your spot</h3>
+        <button class="tour-btn pay" type="button">Pay now</button>
+        <a class="tour-btn whatsapp" href="#">Chat on WhatsApp</a>
+    </form>
+</aside>
 
-            <form action="/create-payment" method="POST">
-                <input type="hidden" name="tour_id" value="{{ tour.id }}">
-
-                <label>Date</label>
-                <input type="date" name="date" required>
-
-                <label>People</label>
-                <select name="people">
-                    {% for i in range(1, 11) %}
-                        <option value="{{ i }}">{{ i }}</option>
-                    {% endfor %}
-                </select>
-
-                <label>Pickup</label>
-                <select name="pickup">
-                    <option value="no">No pickup</option>
-                    <option value="yes"> Airport + $49.99</option>
-                </select>
-
-                <label>Email</label>
-                <input type="email" name="email" required>
-
-                <button class="tour-btn pay" type="submit">
-                    Pay now
-                </button>
-            </form>
-
-            <a class="tour-btn whatsapp"
-               href="https://wa.me/50361116916?text=Hello%20I%20want%20to%20book%20{{ tour.name }}"
-               target="_blank">
-               Chat on WhatsApp
-            </a>
-
-            <p class="trust">
-                ⭐ 5-star experience · Secure payment · 
-            </p>
-
-        </aside>
-
-    </div>
+</div>
 </section>
+
+<!-- PRICE SCRIPT -->
+<script>
+const pricing = {{ tour.pricing | tojson }};
+const peopleSelect = document.querySelector('select[name="people"]');
+const totalText = document.getElementById("totalPrice");
+
+function updateTotal() {
+    const people = peopleSelect.value;
+    let total = pricing[people];
+
+    if (!total) {
+        total = pricing["default"];
+    }
+
+    totalText.innerText = "Total: $" + total + " USD";
+}
+
+peopleSelect.addEventListener("change", updateTotal);
+updateTotal();
+</script>
 
 {% endblock %}

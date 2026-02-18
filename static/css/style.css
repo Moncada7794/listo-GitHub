@@ -108,6 +108,13 @@ body {
     gap: 18px;
 }
 
+/* SECCIÓN DE TOURS DEBAJO DEL HERO */
+.home-tours-section{
+    padding: 80px 20px 120px;
+    display:flex;
+    justify-content:center;
+}
+
 /* BOTÓN WHATSAPP */
 
 .btn-whatsapp {

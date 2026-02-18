@@ -84,7 +84,7 @@ def load_tours():
         FileNotFoundError: Si el archivo tours.json no existe.
         json.JSONDecodeError: Si el archivo no contiene JSON válido.
     """
-    with open("tours.json", "r", encoding="utf-8") as f:
+    with open("data/tours.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -213,10 +213,10 @@ def create_payment():
         return "Tour not found", 404
 
     #  precios dinámicos desde JSON
-    pricing = tour["pricing"]
+    price_one = tour["pricing"]["one"]
+    price_group = tour["pricing"]["group"]
 
-    # precio exacto si existe, si no usa default
-    total = pricing.get(str(people), pricing.get("default", 0))
+    total = price_one if people == 1 else price_group * people
 
     #  pickup opcional
     if pickup == "yes":

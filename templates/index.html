@@ -1,62 +1,68 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-overlay"></div>
+<!-- CONTENEDOR CON EL MISMO BACKGROUND -->
+<section class="home-bg">
 
-  <div class="hero-content">
-    <h1>Experience the Magic of<br>El Salvador</h1>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
 
-    <p class="hero-description">
-      Not a group tour. Not rushed. Not shared.
-      Just you and your people. A fully private experience in El Salvador.
-      Book your private guide today. Reserve your date now.
-    </p>
+        <div class="hero-content">
+            <h1>Experience the Magic of<br>El Salvador</h1>
 
-    <p class="hero-features">
-      🥾 Volcano hikes • 🏝 Secret beaches • 🚐 Safe transport
-    </p>
+            <p class="hero-description">
+                Not a group tour. Not rushed. Not shared.
+                Just you and your people. A fully private experience in El Salvador.
+                Book your private guide today. Reserve your date now.
+            </p>
 
-    <div class="hero-actions">
-      <a href="https://wa.me/50300000000" target="_blank" class="btn-whatsapp">
-        Talk to a representative
-      </a>
+            <p class="hero-features">
+                🥾 Volcano hikes • 🏝️ Secret beaches • 🚐 Safe transport
+            </p>
 
-      <div class="hero-social">
-        <a href="https://instagram.com" target="_blank" class="social social-ig">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://facebook.com" target="_blank" class="social social-fb">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+            <div class="hero-actions">
+                <a href="https://wa.me/50300000000" target="_blank" class="btn-whatsapp">
+                    Talk to a representative
+                </a>
+
+                <div class="hero-social">
+                    <a href="https://instagram.com" target="_blank" class="social social-ig">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" class="social social-fb">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- TOURS SOBRE EL MISMO FONDO -->
+    {% if tours %}
+    <section class="home-tours-section">
+        <div class="home-tours-grid">
+            {% for tour in tours %}
+            <article class="home-tour-card">
+                <div class="tour-image"
+                     style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
+                </div>
+
+                <div class="tour-content">
+                    <h3 class="tour-name">{{ tour.name }}</h3>
+                    <p class="tour-description">From ${{ tour.pricing.one }} USD</p>
+
+                    <a href="/tours/{{ tour.id }}" class="tour-btn">
+                        View details
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
 </section>
-
-<!-- TOURS (FUERA DEL HERO) -->
-{% if tours %}
-<section class="home-tours-section">
-  <div class="home-tours-grid">
-    {% for tour in tours %}
-    <article class="home-tour-card">
-      <div class="tour-image"
-           style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
-      </div>
-
-      <div class="tour-content">
-        <h3 class="tour-name">{{ tour.name }}</h3>
-        <p class="tour-description">From ${{ tour.pricing.one }} USD</p>
-
-        <a href="/tours/{{ tour.id }}" class="tour-btn">
-          View details
-        </a>
-      </div>
-    </article>
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
 
 {% endblock %}

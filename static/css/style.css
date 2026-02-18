@@ -367,43 +367,40 @@ body {
     margin-bottom: 16px;
 }
 
-/* BUTTON */
+/* BOTONES HERO */
 
-.tour-btn {
+.hero-btn {
     display: inline-block;
-    padding: 10px 22px;
-    background: #e53935;
-    color: #fff;
+    padding: 14px 32px;
     border-radius: 999px;
+    font-weight: 700;
     text-decoration: none;
-    font-weight: 600;
-    transition: 0.25s;
+    transition: all 0.25s ease;
 }
 
-.tour-btn:hover {
-    background: #ff4a46;
+/* ROJO – acción principal */
+.hero-btn.primary {
+    background: linear-gradient(135deg, #e53935, #ff4d4f);
+    box-shadow: 0 10px 28px rgba(229,57,53,0.35);
+    color: #fff;
 }
 
-/* ================= Social media ================= */
-.hero-social {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    margin-top: 12px;
+.hero-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(229,57,53,0.45);
 }
 
-.social-icon {
-    width: 28px;
-    height: 28px;
-    fill: white;
-    opacity: 0.85;
-    transition: 0.2s ease;
+/* VERDE PREMIUM – hablar */
+.hero-btn.contact {
+    background: linear-gradient(135deg, #1f7a5c, #24936f);
+    box-shadow: 0 10px 28px rgba(31,122,92,0.35);
+    color: #fff;
 }
 
-.social-icon:hover {
-    opacity: 1;
-    transform: scale(1.12);
-}
+.hero-btn.contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px rgba(31,122,92,0.45);
+}}
 
 /* ===== HERO ACTIONS ===== */
 

@@ -5,134 +5,78 @@
     "description": "Experience an unforgettable adventure to El Salvador’s most iconic volcano and relax by Lake Coatepeque.",
     "image": "santa_ana.jpg",
     "price": "$120 (1 person) · $85 per person (2+)",
-
-	"pricing": {
-  	"one": 120,
-  	"group": 85
-	},
-	
-    "availability": "Flexible dates",
-    "itinerary": [
-      "6:00 AM – Hotel pick-up",
-      "8:00 AM – Cerro Verde briefing",
-      "8:15 AM – Hike to Santa Ana Volcano",
-      "10:00 AM – Summit exploration",
-      "10:30 AM – Descent",
-      "1:00 PM – Optional lunch at Lake Coatepeque",
-      "2:30 PM – Return to San Salvador",
-      "3:45 PM – Hotel arrival"
-    ],
-    "included": [
-      "Private transportation",
-      "Bilingual local guide",
-      "Entrance fees",
-      "Personalized assistance",
-      "Optional drone photography"
-    ],
-    "not_included": [
-      "Meals & drinks",
-      "Tips"
-    ]
+    "pricing": { "one": 120, "group": 85 }
   },
+
   {
     "id": 2,
     "name": "Mayan Ruins Tour – Joya de Cerén & San Andrés",
     "description": "Explore two of the most important Mayan archaeological sites in El Salvador.",
     "image": "jceren.jpg",
     "price": "$140 (1 person) · $90 per person (2+)",
-	"pricing": {
-  	"one": 120,
-  	"group": 85
-	},
-    "availability": "Flexible dates",
-    "itinerary": [
-      "7:00 AM – Hotel pick-up",
-      "9:00 AM – Arrival at Joya de Cerén",
-      "9:15 AM – Guided tour",
-      "10:30 AM – Photo & exploration time",
-      "11:30 AM – Transfer to San Andrés",
-      "12:00 PM – Ceremonial center tour",
-      "1:00 PM – Optional lunch",
-      "2:30 PM – Return to San Salvador",
-      "3:30 PM – Hotel arrival"
-    ],
-    "included": [
-      "Private transport",
-      "Bilingual guide",
-      "Entrance tickets",
-      "Personalized assistance",
-      "Optional drone photography"
-    ],
-    "not_included": [
-      "Food & drinks",
-      "Tips"
-    ]
+    "pricing": { "one": 140, "group": 90 }
   },
+
   {
     "id": 3,
     "name": "Ruta de las Flores Tour",
-    "description": "Discover colorful towns, local gastronomy, culture and mountain landscapes along one of El Salvador’s most charming routes.",
+    "description": "Discover colorful towns, gastronomy, and mountain culture along El Salvador’s most charming route.",
     "image": "rutadelasflores.jpg",
     "price": "$135 (1 person) · $85 per person (2+)",
-	"pricing": {
-  	"one": 120,
-  	"group": 85
-	},
-    "availability": "Weekends",
-    "itinerary": [
-      "6:30 AM – Hotel pick-up",
-      "8:30 AM – Nahuizalco visit",
-      "9:30 AM – Coffee & breakfast stop",
-      "10:30 AM – Salcoatitán walk",
-      "11:30 AM – Juayúa exploration",
-      "1:00 PM – Lunch stop",
-      "2:30 PM – Apaneca / Ataco visit",
-      "4:00 PM – Return to San Salvador",
-      "6:00 PM – Hotel arrival"
-    ],
-    "included": [
-      "Private transportation",
-      "Bilingual guide",
-      "Cultural town visits",
-      "Personalized assistance",
-      "Optional drone footage"
-    ],
-    "not_included": [
-      "Meals & drinks",
-      "Tips"
-    ]
+    "pricing": { "one": 135, "group": 85 }
   },
+
   {
     "id": 4,
     "name": "Turtle Release & Crocodile Watching Tour",
     "description": "Nature and wildlife experience in Barra de Santiago with turtle conservation and crocodile observation.",
     "image": "barra-de-santiago.jpg",
     "price": "$150 (1 person) · $120 per person (2+)",
-	"pricing": {
-  	"one": 120,
-  	"group": 85
-	},
-    "availability": "Flexible dates",
-    "itinerary": [
-      "6:00 AM – Hotel pick-up",
-      "8:30 AM – Turtle release experience",
-      "10:30 AM – Arrival at Barra de Santiago",
-      "10:45 AM – Mangrove boat tour",
-      "11:30 AM – Beach free time",
-      "2:00 PM – Optional lunch",
-      "3:30 PM – Return to hotel",
-      "5:30 PM – Arrival"
-    ],
-    "included": [
-      "Private transportation",
-      "Air-conditioned vehicle",
-      "Bilingual guide",
-      "Boat tour",
-      "Drone footage & video editing"
-    ],
-    "not_included": [
-      "Lunch & drinks",
-      "Tips"
-    ]
+    "pricing": { "one": 150, "group": 120 }
+  },
+
+  {
+    "id": 5,
+    "name": "Taquillo Hiking & Sunset Park Private Tour",
+    "description": "Coastal cliffs, ocean viewpoints, hiking trails and relaxing sunset by the sea.",
+    "image": "taquillo.jpg",
+    "price": "$120 (1 person) · $85 per person (2+) · $75 (3–4) · $65 (5+)",
+    "pricing": { "one": 120, "p2": 85, "p4": 75, "p5": 65 }
+  },
+
+  {
+    "id": 6,
+    "name": "Laguna de Alegría & Finca Rauda Adventure Tour",
+    "description": "Hiking, panoramic viewpoints, nature activities and volcanic lagoon exploration in eastern El Salvador.",
+    "image": "alegria.jpg",
+    "price": "$200 (1 person) · $120 per person (2+)",
+    "pricing": { "one": 200, "group": 120 }
+  },
+
+  {
+    "id": 7,
+    "name": "All Archaeological Sites in One Full-Day Tour",
+    "description": "Complete cultural journey through the most important Maya archaeological sites in El Salvador.",
+    "image": "archaeological.jpg",
+    "price": "$250 (1 person) · $150 (2) · $120 (3+)",
+    "pricing": { "one": 250, "p2": 150, "p3": 120 }
+  },
+
+  {
+    "id": 8,
+    "name": "Copán Ruins Full-Day Private Tour – Honduras",
+    "description": "International adventure to explore the impressive Maya city of Copán in Honduras.",
+    "image": "copan.jpg",
+    "price": "$360 (1) · $190 (2) · $170 (3–4) · $150 (5+)",
+    "pricing": { "one": 360, "p2": 190, "p4": 170, "p5": 150 }
+  },
+
+  {
+    "id": 9,
+    "name": "Puerta del Diablo Private Hiking & Drone Tour",
+    "description": "Iconic viewpoints, forest hiking trails and cinematic 4K drone footage experience.",
+    "image": "puertadeldiablo.jpg",
+    "price": "$160 (1) · $85 per person (2+)",
+    "pricing": { "one": 160, "group": 85 }
   }
 ]

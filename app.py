@@ -197,31 +197,50 @@ def gallery():
 
 @app.route("/create-payment", methods=["POST"])
 def create_payment():
-    # ---------- datos del formulario ----------
+
     tour_id = int(request.form.get("tour_id"))
     date = request.form.get("date")
     people = int(request.form.get("people"))
-
     email = request.form.get("email")
+
     pickup = request.form.get("pickup")
 
-    # ---------- cargar tour real ----------
-    tours = load_tours()
-    tour = next((t for t in tours if t["id"] == tour_id), None)
+    # buscar tour real
+    tours_data = load_tours()
+    tour = next((t for t in tours_data if t["id"] == tour_id), None)
 
     if not tour:
-        return jsonify({"error": "Tour not found"}), 404
+        return "Tour not found", 404
 
-    # ---------- precios dinámicos ----------
-    price_one = tour["price_one"]
-    price_group = tour["price_group"]
+    #  precios dinámicos desde JSON
+    price_one = tour["pricing"]["one"]
+    price_group = tour["pricing"]["group"]
 
     total = price_one if people == 1 else price_group * people
 
+    #  pickup opcional
     if pickup == "yes":
-        total += 50
+        total += 49.99
 
-    # ---------- referencia segura ----------
+    #  TOKEN WOMPI
+    auth_response = requests.post(
+        os.getenv("WOMPI_AUTH"),
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        data={
+            "grant_type": "client_credentials",
+            "client_id": os.getenv("WOMPI_CLIENT_ID"),
+            "client_secret": os.getenv("WOMPI_CLIENT_SECRET"),
+            "audience": "wompi_api"
+        }
+    )
+
+    token_data = auth_response.json()
+    access_token = token_data.get("access_token")
+
+    if not access_token:
+        return jsonify({"error": "No access_token", "details": token_data}), 400
+
+    #  referencia segura para guardar booking después
     reference_payload = json.dumps({
         "tour_id": tour_id,
         "date": date,
@@ -229,63 +248,33 @@ def create_payment():
         "email": email
     })
 
-    try:
-        # ---------- obtener token ----------
-        auth_response = requests.post(
-            os.getenv("WOMPI_AUTH"),
-            headers={"Content-Type": "application/x-www-form-urlencoded"},
-            data={
-                "grant_type": "client_credentials",
-                "client_id": os.getenv("WOMPI_CLIENT_ID"),
-                "client_secret": os.getenv("WOMPI_CLIENT_SECRET"),
-                "audience": "wompi_api"
-            }
-        )
+    #  crear enlace de pago
+    payment_response = requests.post(
+        f"{os.getenv('WOMPI_API')}/EnlacePago",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json"
+        },
+        json={
+            "nombreProducto": tour["name"],
+            "descripcionProducto": f"{people} personas – {date}",
+            "identificadorEnlaceComercio": f"tour-{tour_id}-{uuid.uuid4()}",
+            "monto": round(total, 2),
+            "moneda": "USD",
+            "cantidadDisponible": 1,
+            "referencia": reference_payload,
+            "vigencia": {"tipo": "MINUTOS", "valor": 1440},
+            "urlRedirect": "https://hikingelsalvador.com/payment-success"
+        }
+    )
 
-        token_data = auth_response.json()
-        access_token = token_data.get("access_token")
+    payment_data = payment_response.json()
+    url_pago = payment_data.get("urlEnlace")
 
-        if not access_token:
-            return jsonify({"error": "No access_token", "details": token_data}), 400
+    if not url_pago:
+        return jsonify({"error": "No payment link", "details": payment_data}), 400
 
-        # ---------- crear enlace de pago ----------
-        payment_response = requests.post(
-            f"{os.getenv('WOMPI_API')}/EnlacePago",
-            headers={
-                "Authorization": f"Bearer {access_token}",
-                "Content-Type": "application/json"
-            },
-            json={
-                "nombreProducto": tour["name"],
-                "descripcionProducto": f"{people} persona(s) • {date}",
-                "identificadorEnlaceComercio": f"tour-{tour_id}-{uuid.uuid4()}",
-                "monto": round(total, 2),
-                "moneda": "USD",
-                "cantidadDisponible": 1,
-                "referencia": reference_payload,
-                "vigencia": {
-                    "tipo": "MINUTOS",
-                    "valor": 1440
-                },
-                "urlRedirect": "https://hikingelsalvador.com/payment-success"
-            }
-        )
-
-        payment_data = payment_response.json()
-        print("WOMPI RESPONSE:", payment_data)
-
-        url_pago = payment_data.get("urlEnlace")
-
-        if not url_pago:
-            return jsonify({
-                "error": "No payment link generated",
-                "details": payment_data
-            }), 400
-
-        return redirect(url_pago)
-
-    except Exception as e:
-        return jsonify({"error": "Exception", "details": str(e)}), 500
+    return redirect(url_pago)
 
 
 @app.route("/payment-success")

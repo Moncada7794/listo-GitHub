@@ -43,7 +43,7 @@
     "id": 5,
     "name": "Taquillo Hiking & Sunset Park Private Tour",
     "description": "Coastal cliffs, ocean viewpoints, hiking trails and relaxing sunset by the sea.",
-    "image": "taquillo.jpg",
+    "image": "Taquillo.jpg",
     "pricing": { "one": 120, "group": 85 },
     "included": ["Transport", "Guide"],
     "not_included": ["Dinner"],

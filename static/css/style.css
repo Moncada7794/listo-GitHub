@@ -383,3 +383,24 @@ body {
 .tour-btn:hover {
     background: #ff4a46;
 }
+
+/* ================= Social media ================= */
+.hero-social {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 12px;
+}
+
+.social-icon {
+    width: 28px;
+    height: 28px;
+    fill: white;
+    opacity: 0.85;
+    transition: 0.2s ease;
+}
+
+.social-icon:hover {
+    opacity: 1;
+    transform: scale(1.12);
+}

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- HERO -->
 <section class="tour-hero"
 style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
     <div class="tour-hero-overlay"></div>
@@ -12,17 +11,13 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
     </div>
 </section>
 
-<!-- CONTENT WRAPPER -->
 <div class="tour-layout">
 
-    <!-- LEFT COLUMN -->
     <div class="tour-info-card">
-
         <h2>Why you'll love this experience</h2>
 
         <div class="tour-columns">
 
-            <!-- Itinerary -->
             <div class="tour-block">
                 <h3>Itinerary</h3>
                 <ul>
@@ -32,7 +27,6 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
                 </ul>
             </div>
 
-            <!-- Included -->
             <div class="tour-block">
                 <h3>Included</h3>
                 <ul>
@@ -42,7 +36,6 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
                 </ul>
             </div>
 
-            <!-- Not Included -->
             <div class="tour-block">
                 <h3>Not included</h3>
                 <ul>
@@ -55,16 +48,17 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
         </div>
     </div>
 
-    <!-- RIGHT COLUMN / BOOKING -->
     <aside class="booking-box">
         <h3>Reserve your spot</h3>
 
-        <form>
+        <!-- 🔥 ESTE ES TU ENDPOINT REAL -->
+        <form method="POST" action="/create-payment">
+
             <label>Date</label>
-            <input type="date" required>
+            <input type="date" name="date" id="dateInput" required>
 
             <label>People</label>
-            <select name="people">
+            <select name="people" id="peopleSelect">
                 {% for i in range(1, 11) %}
                 <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}
@@ -77,40 +71,44 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
             </select>
 
             <label>Email</label>
-            <input type="email" required>
+            <input type="email" name="email" id="emailInput" required>
+
+            <input type="hidden" name="tour_id" value="{{ tour.id }}">
 
             <p id="totalPrice" style="font-weight:bold;margin:12px 0;"></p>
 
-            <button class="tour-btn pay" type="button">Pay now</button>
-            <a class="tour-btn whatsapp" href="#">Chat on WhatsApp</a>
+            <!-- 🔥 SUBMIT REAL (como antes) -->
+            <button class="tour-btn pay" type="submit">
+                Pay now
+            </button>
+
+            <!-- 🔥 WhatsApp solo informativo previo al pago -->
+            <a class="tour-btn whatsapp" id="waButton" target="_blank">
+                Chat on WhatsApp
+            </a>
+
         </form>
     </aside>
 
 </div>
 
-<!-- PRICE SCRIPT -->
 <script>
 const pricing = {{ tour.pricing | tojson }};
-const peopleSelect = document.querySelector('select[name="people"]');
+const peopleSelect = document.getElementById("peopleSelect");
 const pickupSelect = document.getElementById("pickupSelect");
 const totalText = document.getElementById("totalPrice");
+const dateInput = document.getElementById("dateInput");
+const emailInput = document.getElementById("emailInput");
+const waButton = document.getElementById("waButton");
 
-function updateTotal() {
+function calculateTotal() {
     let people = parseInt(peopleSelect.value);
     let total = 0;
 
     if (people === 1) {
         total = pricing.one;
-    } else if (pricing.group) {
+    } else {
         total = pricing.group * people;
-    } else if (pricing.p2 && people === 2) {
-        total = pricing.p2 * people;
-    } else if (pricing.p3 && people >= 3) {
-        total = pricing.p3 * people;
-    } else if (pricing.p4 && people === 4) {
-        total = pricing.p4 * people;
-    } else if (pricing.p5 && people >= 5) {
-        total = pricing.p5 * people;
     }
 
     if (pickupSelect.value === "airport") {
@@ -118,12 +116,31 @@ function updateTotal() {
     }
 
     totalText.innerText = "Total: $" + total.toFixed(2) + " USD";
+
+    updateWhatsApp(total);
 }
 
-peopleSelect.addEventListener("change", updateTotal);
-pickupSelect.addEventListener("change", updateTotal);
+function updateWhatsApp(total) {
+    let message = `Hello, I want to book:
 
-updateTotal();
+Tour: {{ tour.name }}
+Date: ${dateInput.value}
+People: ${peopleSelect.value}
+Pickup: ${pickupSelect.options[pickupSelect.selectedIndex].text}
+Total: $${total.toFixed(2)} USD
+Email: ${emailInput.value}`;
+
+    waButton.href =
+    "https://wa.me/61116916?text=" +
+    encodeURIComponent(message);
+}
+
+peopleSelect.addEventListener("change", calculateTotal);
+pickupSelect.addEventListener("change", calculateTotal);
+dateInput.addEventListener("change", calculateTotal);
+emailInput.addEventListener("input", calculateTotal);
+
+calculateTotal();
 </script>
 
 {% endblock %}

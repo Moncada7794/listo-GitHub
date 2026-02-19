@@ -17,12 +17,9 @@
             <div class="tour-info">
                 <h2>{{ tour.name }}</h2>
 
-                <p class="tour-meta">
-                    ⏱ {{ tour.duration or "Full day" }} · 🚐 Pickup included
-                </p>
-
-                <p class="tour-price">
-                    From ${{ tour.price }} USD
+              
+               <p class="tour-price">
+                   From ${{ tour.pricing.one }} USD
                 </p>
 
                 <a href="/tours/{{ tour.id }}" class="tour-btn">

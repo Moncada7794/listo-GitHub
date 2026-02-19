@@ -219,7 +219,7 @@ def create_payment():
     total = price_one if people == 1 else price_group * people
 
     #  pickup opcional
-    if pickup == "yes":
+    if pickup == "airport":
         total += 49.99
 
     #  TOKEN WOMPI

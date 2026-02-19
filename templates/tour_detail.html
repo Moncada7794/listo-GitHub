@@ -13,33 +13,43 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
 </section>
 
 <!-- CONTENT -->
-<section class="tour-container">
-<div class="tour-layout">
+<div class="tour-info-card">
 
-<!-- LEFT -->
-<div>
     <h2>Why you'll love this experience</h2>
 
-    <h3>Itinerary</h3>
-    <ul>
-        {% for item in tour.itinerary %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+    <div class="tour-columns">
 
-    <h3>Included</h3>
-    <ul>
-        {% for item in tour.included %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+        <!-- Itinerary -->
+        <div class="tour-block">
+            <h3>Itinerary</h3>
+            <ul>
+                {% for item in tour.itinerary %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
-    <h3>Not included</h3>
-    <ul>
-        {% for item in tour.not_included %}
-        <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
+        <!-- Included -->
+        <div class="tour-block">
+            <h3>Included</h3>
+            <ul>
+                {% for item in tour.included %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Not Included -->
+        <div class="tour-block">
+            <h3>Not included</h3>
+            <ul>
+                {% for item in tour.not_included %}
+                <li>{{ item }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
 </div>
 
 <!-- BOOKING -->
@@ -56,6 +66,12 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
             <option value="{{ i }}">{{ i }}</option>
             {% endfor %}
         </select>
+        
+        <label>Pickup location</label>
+<select name="pickup" id="pickupSelect">
+    <option value="san_salvador">San Salvador (included)</option>
+    <option value="airport">Airport pickup (+$49.99)</option>
+</select>
 
         <label>Email</label>
         <input type="email" required>
@@ -74,6 +90,7 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
 <script>
 const pricing = {{ tour.pricing | tojson }};
 const peopleSelect = document.querySelector('select[name="people"]');
+const pickupSelect = document.getElementById("pickupSelect");
 const totalText = document.getElementById("totalPrice");
 
 function updateTotal() {
@@ -86,10 +103,17 @@ function updateTotal() {
         total = pricing.group * people;
     }
 
-    totalText.innerText = "Total: $" + total + " USD";
+    // aeropuerto suma extra
+    if (pickupSelect.value === "airport") {
+        total += 49.99;
+    }
+
+    totalText.innerText = "Total: $" + total.toFixed(2) + " USD";
 }
 
 peopleSelect.addEventListener("change", updateTotal);
+pickupSelect.addEventListener("change", updateTotal);
+
 updateTotal();
 </script>
 {% endblock %}

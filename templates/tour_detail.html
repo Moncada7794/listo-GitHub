@@ -4,87 +4,89 @@
 <!-- HERO -->
 <section class="tour-hero"
 style="background-image:url('{{ url_for('static', filename='images/' ~ tour.image) }}')">
-<div class="tour-hero-overlay"></div>
+    <div class="tour-hero-overlay"></div>
 
-<div class="hero-content">
-    <h1>{{ tour.name }}</h1>
-    <p>{{ tour.description }}</p>
-</div>
-</section>
-
-<!-- CONTENT -->
-<div class="tour-info-card">
-
-    <h2>Why you'll love this experience</h2>
-
-    <div class="tour-columns">
-
-        <!-- Itinerary -->
-        <div class="tour-block">
-            <h3>Itinerary</h3>
-            <ul>
-                {% for item in tour.itinerary %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Included -->
-        <div class="tour-block">
-            <h3>Included</h3>
-            <ul>
-                {% for item in tour.included %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <!-- Not Included -->
-        <div class="tour-block">
-            <h3>Not included</h3>
-            <ul>
-                {% for item in tour.not_included %}
-                <li>{{ item }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
+    <div class="hero-content">
+        <h1>{{ tour.name }}</h1>
+        <p>{{ tour.description }}</p>
     </div>
-</div>
-
-<!-- BOOKING -->
-<aside class="booking-box">
-    <h3>Reserve your spot</h3>
-
-    <form>
-        <label>Date</label>
-        <input type="date" required>
-
-        <label>People</label>
-        <select name="people">
-            {% for i in range(1, 11) %}
-            <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-        </select>
-        
-        <label>Pickup location</label>
-<select name="pickup" id="pickupSelect">
-    <option value="san_salvador">San Salvador (included)</option>
-    <option value="airport">Airport pickup (+$49.99)</option>
-</select>
-
-        <label>Email</label>
-        <input type="email" required>
-
-        <p id="totalPrice" style="font-weight:bold;margin:12px 0;"></p>
-
-        <button class="tour-btn pay" type="button">Pay now</button>
-        <a class="tour-btn whatsapp" href="#">Chat on WhatsApp</a>
-    </form>
-</aside>
-
-</div>
 </section>
+
+<!-- CONTENT WRAPPER -->
+<div class="tour-layout">
+
+    <!-- LEFT COLUMN -->
+    <div class="tour-info-card">
+
+        <h2>Why you'll love this experience</h2>
+
+        <div class="tour-columns">
+
+            <!-- Itinerary -->
+            <div class="tour-block">
+                <h3>Itinerary</h3>
+                <ul>
+                    {% for item in tour.itinerary %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Included -->
+            <div class="tour-block">
+                <h3>Included</h3>
+                <ul>
+                    {% for item in tour.included %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Not Included -->
+            <div class="tour-block">
+                <h3>Not included</h3>
+                <ul>
+                    {% for item in tour.not_included %}
+                    <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN / BOOKING -->
+    <aside class="booking-box">
+        <h3>Reserve your spot</h3>
+
+        <form>
+            <label>Date</label>
+            <input type="date" required>
+
+            <label>People</label>
+            <select name="people">
+                {% for i in range(1, 11) %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Pickup location</label>
+            <select name="pickup" id="pickupSelect">
+                <option value="san_salvador">San Salvador (included)</option>
+                <option value="airport">Airport pickup (+$49.99)</option>
+            </select>
+
+            <label>Email</label>
+            <input type="email" required>
+
+            <p id="totalPrice" style="font-weight:bold;margin:12px 0;"></p>
+
+            <button class="tour-btn pay" type="button">Pay now</button>
+            <a class="tour-btn whatsapp" href="#">Chat on WhatsApp</a>
+        </form>
+    </aside>
+
+</div>
 
 <!-- PRICE SCRIPT -->
 <script>
@@ -99,11 +101,18 @@ function updateTotal() {
 
     if (people === 1) {
         total = pricing.one;
-    } else {
+    } else if (pricing.group) {
         total = pricing.group * people;
+    } else if (pricing.p2 && people === 2) {
+        total = pricing.p2 * people;
+    } else if (pricing.p3 && people >= 3) {
+        total = pricing.p3 * people;
+    } else if (pricing.p4 && people === 4) {
+        total = pricing.p4 * people;
+    } else if (pricing.p5 && people >= 5) {
+        total = pricing.p5 * people;
     }
 
-    // aeropuerto suma extra
     if (pickupSelect.value === "airport") {
         total += 49.99;
     }
@@ -116,4 +125,5 @@ pickupSelect.addEventListener("change", updateTotal);
 
 updateTotal();
 </script>
+
 {% endblock %}

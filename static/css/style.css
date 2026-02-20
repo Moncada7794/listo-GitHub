@@ -425,3 +425,21 @@ body{
         height:50vh;
     }
 }
+
+/* ===== FIX HEADER OVERLAY MOBILE ===== */
+
+@media (max-width: 768px){
+
+    body{
+        padding-top: 80px;
+    }
+
+    .hero{
+        padding-top: 100px;
+    }
+
+    .tour-hero{
+        padding-top: 80px;
+    }
+
+}

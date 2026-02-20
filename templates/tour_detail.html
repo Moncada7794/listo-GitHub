@@ -51,7 +51,7 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
     <aside class="booking-box">
         <h3>Reserve your spot</h3>
 
-        <!-- 🔥 ESTE ES TU ENDPOINT REAL -->
+        <!--  ESTE ES TU ENDPOINT REAL -->
         <form method="POST" action="/create-payment">
 
             <label>Date</label>
@@ -77,12 +77,12 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
 
             <p id="totalPrice" style="font-weight:bold;margin:12px 0;"></p>
 
-            <!-- 🔥 SUBMIT REAL (como antes) -->
+            <!--  SUBMIT REAL (como antes) -->
             <button class="tour-btn pay" type="submit">
                 Pay now
             </button>
 
-            <!-- 🔥 WhatsApp solo informativo previo al pago -->
+            <!--  WhatsApp solo informativo previo al pago -->
             <a class="tour-btn whatsapp" id="waButton" target="_blank">
                 Chat on WhatsApp
             </a>
@@ -131,7 +131,7 @@ Total: $${total.toFixed(2)} USD
 Email: ${emailInput.value}`;
 
     waButton.href =
-    "https://wa.me/61116916?text=" +
+    "https://wa.me/50361116916?text=" +
     encodeURIComponent(message);
 }
 

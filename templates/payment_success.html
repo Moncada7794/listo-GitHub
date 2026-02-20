@@ -1,13 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="tour-container" style="text-align:center; padding:80px 20px;">
-    <h1>Payment successful 🎉</h1>
-    <p>Your tour has been reserved.</p>
+<div style="padding:100px 20px;text-align:center;max-width:600px;margin:auto;">
 
-    <a href="/tours" class="tour-btn" style="margin-top:20px; display:inline-block;">
-        Back to tours
+    <h1 style="margin-bottom:20px;">✅ Payment Successful</h1>
+
+    {% if tour and booking %}
+
+    <p>Your reservation has been confirmed.</p>
+
+    <div style="margin:30px 0;text-align:left;">
+        <p><strong>Tour:</strong> {{ tour.name }}</p>
+        <p><strong>Date:</strong> {{ booking.date }}</p>
+        <p><strong>People:</strong> {{ booking.people }}</p>
+        <p><strong>Email:</strong> {{ booking.email }}</p>
+        <p><strong>Total Paid:</strong> ${{ total }} USD</p>
+    </div>
+
+    <a id="waConfirm" class="tour-btn whatsapp" target="_blank">
+        Confirm via WhatsApp
     </a>
-</section>
+
+    <script>
+        const message = `New Paid Booking:
+
+Tour: {{ tour.name }}
+Date: {{ booking.date }}
+People: {{ booking.people }}
+Total Paid: ${{ total }} USD
+Customer Email: {{ booking.email }}`;
+
+        document.getElementById("waConfirm").href =
+        "https://wa.me/50361116916?text=" +
+        encodeURIComponent(message);
+    </script>
+
+    {% else %}
+        <p>We are verifying your payment.</p>
+    {% endif %}
+
+</div>
 
 {% endblock %}

@@ -292,6 +292,7 @@ def payment_success():
     data = r.json()
 
     if data.get("data", {}).get("status") == "APPROVED":
+
         reference_data = data["data"].get("reference")
 
         if reference_data:
@@ -306,6 +307,17 @@ def payment_success():
 
             db.session.add(booking)
             db.session.commit()
+
+            # buscar nombre del tour
+            tours_data = load_tours()
+            tour = next((t for t in tours_data if t["id"] == pending["tour_id"]), None)
+
+            return render_template(
+                "payment_success.html",
+                tour=tour,
+                booking=pending,
+                total=data["data"]["amount_in_cents"] / 100
+            )
 
     return render_template("payment_success.html")
 

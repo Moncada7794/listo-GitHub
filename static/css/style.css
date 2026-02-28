@@ -443,3 +443,24 @@ body{
     }
 
 }
+
+/* ================= Cart ================= */
+.cart-icon{
+    position:absolute;
+    right:24px;
+    font-weight:700;
+}
+
+.cart-icon a{
+    color:white;
+    text-decoration:none;
+    font-size:.95rem;
+}
+
+#cartCount{
+    background:#e53935;
+    padding:2px 7px;
+    border-radius:999px;
+    font-size:.75rem;
+    margin-left:4px;
+}

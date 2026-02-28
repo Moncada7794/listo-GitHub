@@ -24,6 +24,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         <a href="/calendar">Availability</a>
         <a href="/gallery">Gallery</a>
     </nav>
+<div class="cart-icon">
+    <a href="/cart">
+        🛒 <span id="cartCount">0</span>
+    </a>
+</div>
+
 </header>
 <!-- PAGE CONTENT -->
 <main>
@@ -39,6 +45,14 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         </a>
     </p>
 </footer>
+<script>
+function updateCartCount(){
+    const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+    const el = document.getElementById("cartCount");
+    if(el) el.innerText = cart.length;
+}
+updateCartCount();
+</script>
 
 </body>
 </html>

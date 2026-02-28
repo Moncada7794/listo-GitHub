@@ -1,41 +1,91 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="tour-container">
-    <h2>Your cart</h2>
+<div class="tours-page">
+    <h1>Your cart</h1>
 
     <div id="cartItems"></div>
-    <h3 id="cartTotal"></h3>
 
-    <form method="POST" action="/create-payment">
-        <input type="hidden" name="cart_data" id="cartData">
-        <button class="tour-btn pay">Pay all tours</button>
+    <h2 id="cartTotal"></h2>
+
+    <form method="POST" action="/create-payment" id="cartForm">
+        <input type="hidden" name="cart_data" id="cartDataInput">
+        <button class="tour-btn pay" type="submit" id="payBtn">
+            Pay all tours
+        </button>
     </form>
-</section>
+</div>
 
 <script>
-const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
-const container = document.getElementById("cartItems");
+function getCart(){
+    return JSON.parse(sessionStorage.getItem("cart") || "[]");
+}
 
-let total = 0;
+function saveCart(cart){
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+}
 
-cart.forEach(item=>{
-    total += item.price;
+function removeItem(index){
+    const cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart);
+    loadCart();
+    updateCartCount();
+}
 
-    container.innerHTML += `
-        <div style="margin-bottom:12px">
-            ${item.name}<br>
-            ${item.people} people — ${item.date}<br>
-            $${item.price.toFixed(2)}
-        </div>
-    `;
+function loadCart(){
+    const cart = getCart();
+    const container = document.getElementById("cartItems");
+    const totalEl = document.getElementById("cartTotal");
+    const payBtn = document.getElementById("payBtn");
+
+    let total = 0;
+    container.innerHTML = "";
+
+    //  carrito vacío
+    if(cart.length === 0){
+        container.innerHTML = `
+            <p style="opacity:.8">Your cart is empty.</p>
+        `;
+        totalEl.innerText = "";
+        payBtn.style.display = "none";
+        return;
+    }
+
+    //  render items
+    cart.forEach((item, index)=>{
+        total += item.price;
+
+        container.innerHTML += `
+            <div style="margin-bottom:16px;padding:12px;border-radius:12px;background:rgba(255,255,255,0.05)">
+                <strong>${item.name}</strong><br>
+                ${item.date} — ${item.people} people — $${item.price.toFixed(2)}
+                <br>
+                <button onclick="removeItem(${index})"
+                        style="margin-top:6px;background:#e53935;color:white;border:none;padding:4px 10px;border-radius:6px;cursor:pointer">
+                    Remove
+                </button>
+            </div>
+        `;
+    });
+
+    totalEl.innerText = "Total: $" + total.toFixed(2) + " USD";
+
+    //  enviar carrito al backend
+    document.getElementById("cartDataInput").value =
+        JSON.stringify(cart);
+}
+
+//  limpiar carrito después de enviar pago
+document.getElementById("cartForm").addEventListener("submit", () => {
+    // pequeño delay para no interferir con redirect
+    setTimeout(()=>{
+        sessionStorage.removeItem("cart");
+        updateCartCount();
+    }, 500);
 });
 
-document.getElementById("cartTotal").innerText =
-    "Total: $" + total.toFixed(2) + " USD";
-
-document.getElementById("cartData").value =
-    JSON.stringify(cart);
+loadCart();
 </script>
 
 {% endblock %}

@@ -218,16 +218,13 @@ def gallery():
 @app.route("/create-payment", methods=["POST"])
 def create_payment():
 
-    # =============================
-    # 🛒 NUEVO: detectar carrito
-    # =============================
-    cart_data = request.form.get("cart_data")
-
     tours_data = load_tours()
 
-    # =========================================================
-    # CASO 1 — PAGO DESDE CARRITO (NO rompe flujo actual)
-    # =========================================================
+    # =====================================================
+    # 🛒 CASO 1 — PAGO DESDE CARRITO (MULTI-TOUR)
+    # =====================================================
+    cart_data = request.form.get("cart_data")
+
     if cart_data:
         try:
             cart = json.loads(cart_data)
@@ -243,12 +240,12 @@ def create_payment():
             "cart": cart
         })
 
-        nombre_producto = "Cotuza Tours - Multiple Tours"
-        descripcion_producto = f"{len(cart)} tour(s) combined"
+        product_name = "Cotuza Tours – Multi-Tour Booking"
+        product_desc = f"{len(cart)} tours"
 
-    # =========================================================
-    #  CASO 2 — TU FLUJO ORIGINAL (INTACTO)
-    # =========================================================
+    # =====================================================
+    # 🎯 CASO 2 — PAGO INDIVIDUAL (TU FLUJO ACTUAL)
+    # =====================================================
     else:
         tour_id = int(request.form.get("tour_id"))
         date = request.form.get("date")
@@ -256,19 +253,15 @@ def create_payment():
         email = request.form.get("email")
         pickup = request.form.get("pickup")
 
-        # buscar tour real
         tour = next((t for t in tours_data if t["id"] == tour_id), None)
-
         if not tour:
             return "Tour not found", 404
 
-        # precios dinámicos desde JSON
         price_one = tour["pricing"]["one"]
         price_group = tour["pricing"]["group"]
 
         total = price_one if people == 1 else price_group * people
 
-        # pickup opcional
         if pickup == "airport":
             total += 49.99
 
@@ -279,12 +272,12 @@ def create_payment():
             "email": email
         })
 
-        nombre_producto = tour["name"]
-        descripcion_producto = f"{people} personas – {date}"
+        product_name = tour["name"]
+        product_desc = f"{people} personas – {date}"
 
-    # =========================================================
-    #  TOKEN WOMPI (SIN CAMBIOS)
-    # =========================================================
+    # =====================================================
+    # 🔐 TOKEN WOMPI (NO TOCAR)
+    # =====================================================
     auth_response = requests.post(
         os.getenv("WOMPI_AUTH"),
         headers={"Content-Type": "application/x-www-form-urlencoded"},
@@ -302,9 +295,9 @@ def create_payment():
     if not access_token:
         return jsonify({"error": "No access_token", "details": token_data}), 400
 
-    # =========================================================
-    #  CREAR ENLACE WOMPI (MISMA ESTRUCTURA)
-    # =========================================================
+    # =====================================================
+    # 💳 CREAR LINK WOMPI
+    # =====================================================
     payment_response = requests.post(
         f"{os.getenv('WOMPI_API')}/EnlacePago",
         headers={
@@ -312,8 +305,8 @@ def create_payment():
             "Content-Type": "application/json"
         },
         json={
-            "nombreProducto": nombre_producto,
-            "descripcionProducto": descripcion_producto,
+            "nombreProducto": product_name,
+            "descripcionProducto": product_desc,
             "identificadorEnlaceComercio": f"tour-{uuid.uuid4()}",
             "monto": round(total, 2),
             "moneda": "USD",

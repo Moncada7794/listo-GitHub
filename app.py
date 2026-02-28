@@ -104,37 +104,19 @@ def send_whatsapp_notifications(message):
         os.getenv("WHATSAPP_NUMBER_2")
     ]
 
-    encoded_message = urllib.parse.quote(message)
-
     for number in numbers:
-        if not number:
-            continue
-
-        try:
-            # Esto solo genera el link (modo seguro)
-            wa_url = f"https://wa.me/{number}?text={encoded_message}"
-            print("WhatsApp notify:", wa_url)
-
-        except Exception as e:
-            print("WhatsApp error:", e)def send_whatsapp_notifications(message):
-    numbers = [
-        os.getenv("WHATSAPP_NUMBER_1"),
-        os.getenv("WHATSAPP_NUMBER_2")
-    ]
-
-    encoded_message = urllib.parse.quote(message)
-
-    for number in numbers:
-        if not number:
-            continue
-
-        try:
-            # Esto solo genera el link (modo seguro)
-            wa_url = f"https://wa.me/{number}?text={encoded_message}"
-            print("WhatsApp notify:", wa_url)
-
-        except Exception as e:
-            print("WhatsApp error:", e)
+        if number:
+            try:
+                requests.get(
+                    url="https://api.whatsapp.com/send",
+                    params={
+                        "phone": number,
+                        "text": message
+                    },
+                    timeout=5
+                )
+            except Exception as e:
+                print("WhatsApp error:", e)
 
 @app.route("/")
 def home():

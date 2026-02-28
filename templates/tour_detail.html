@@ -82,6 +82,12 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
                 Pay now
             </button>
 
+             <button type="button"
+       		 	class="tour-btn"
+        	 	id="addToCartBtn">
+   		 Add to cart
+ 		</button>
+
             <!--  WhatsApp solo informativo previo al pago -->
             <a class="tour-btn whatsapp" id="waButton" target="_blank">
                 Chat on WhatsApp
@@ -119,6 +125,32 @@ function calculateTotal() {
 
     updateWhatsApp(total);
 }
+
+function getCart(){
+    return JSON.parse(sessionStorage.getItem("cart") || "[]");
+}
+
+function saveCart(cart){
+    sessionStorage.setItem("cart", JSON.stringify(cart));
+}
+
+document.getElementById("addToCartBtn").addEventListener("click", () => {
+
+    const cart = getCart();
+
+    cart.push({
+        tour_id: {{ tour.id }},
+        name: "{{ tour.name }}",
+        date: document.querySelector('input[type="date"]').value,
+        people: parseInt(document.querySelector('select[name="people"]').value),
+        pickup: document.getElementById("pickupSelect").value,
+        price: parseFloat(totalText.innerText.replace(/[^\d.]/g, ""))
+    });
+
+    saveCart(cart);
+
+    alert("Added to cart ✅");
+});
 
 function updateWhatsApp(total) {
     let message = `Hello, I want to book:

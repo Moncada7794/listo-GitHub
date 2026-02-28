@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="tour-container">
+    <h2>Your cart</h2>
+
+    <div id="cartItems"></div>
+    <h3 id="cartTotal"></h3>
+
+    <form method="POST" action="/create-payment">
+        <input type="hidden" name="cart_data" id="cartData">
+        <button class="tour-btn pay">Pay all tours</button>
+    </form>
+</section>
+
+<script>
+const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+const container = document.getElementById("cartItems");
+
+let total = 0;
+
+cart.forEach(item=>{
+    total += item.price;
+
+    container.innerHTML += `
+        <div style="margin-bottom:12px">
+            ${item.name}<br>
+            ${item.people} people — ${item.date}<br>
+            $${item.price.toFixed(2)}
+        </div>
+    `;
+});
+
+document.getElementById("cartTotal").innerText =
+    "Total: $" + total.toFixed(2) + " USD";
+
+document.getElementById("cartData").value =
+    JSON.stringify(cart);
+</script>
+
+{% endblock %}

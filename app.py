@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, redirect
 import requests, uuid
 from flask_sqlalchemy import SQLAlchemy
+import urllib.parse
 
 load_dotenv()
 
@@ -97,6 +98,43 @@ def save_bookings(bookings):
     with open("data/bookings.json", "w", encoding="utf-8") as f:
         json.dump(bookings, f, indent=2)
 
+def send_whatsapp_notifications(message):
+    numbers = [
+        os.getenv("WHATSAPP_NUMBER_1"),
+        os.getenv("WHATSAPP_NUMBER_2")
+    ]
+
+    encoded_message = urllib.parse.quote(message)
+
+    for number in numbers:
+        if not number:
+            continue
+
+        try:
+            # Esto solo genera el link (modo seguro)
+            wa_url = f"https://wa.me/{number}?text={encoded_message}"
+            print("WhatsApp notify:", wa_url)
+
+        except Exception as e:
+            print("WhatsApp error:", e)def send_whatsapp_notifications(message):
+    numbers = [
+        os.getenv("WHATSAPP_NUMBER_1"),
+        os.getenv("WHATSAPP_NUMBER_2")
+    ]
+
+    encoded_message = urllib.parse.quote(message)
+
+    for number in numbers:
+        if not number:
+            continue
+
+        try:
+            # Esto solo genera el link (modo seguro)
+            wa_url = f"https://wa.me/{number}?text={encoded_message}"
+            print("WhatsApp notify:", wa_url)
+
+        except Exception as e:
+            print("WhatsApp error:", e)
 
 @app.route("/")
 def home():
@@ -198,31 +236,73 @@ def gallery():
 @app.route("/create-payment", methods=["POST"])
 def create_payment():
 
-    tour_id = int(request.form.get("tour_id"))
-    date = request.form.get("date")
-    people = int(request.form.get("people"))
-    email = request.form.get("email")
+    # =============================
+    # 🛒 NUEVO: detectar carrito
+    # =============================
+    cart_data = request.form.get("cart_data")
 
-    pickup = request.form.get("pickup")
-
-    # buscar tour real
     tours_data = load_tours()
-    tour = next((t for t in tours_data if t["id"] == tour_id), None)
 
-    if not tour:
-        return "Tour not found", 404
+    # =========================================================
+    # CASO 1 — PAGO DESDE CARRITO (NO rompe flujo actual)
+    # =========================================================
+    if cart_data:
+        try:
+            cart = json.loads(cart_data)
+        except Exception:
+            return jsonify({"error": "Invalid cart data"}), 400
 
-    #  precios dinámicos desde JSON
-    price_one = tour["pricing"]["one"]
-    price_group = tour["pricing"]["group"]
+        if not cart:
+            return jsonify({"error": "Empty cart"}), 400
 
-    total = price_one if people == 1 else price_group * people
+        total = sum(item.get("price", 0) for item in cart)
 
-    #  pickup opcional
-    if pickup == "airport":
-        total += 49.99
+        reference_payload = json.dumps({
+            "cart": cart
+        })
 
-    #  TOKEN WOMPI
+        nombre_producto = "Cotuza Tours - Multiple Tours"
+        descripcion_producto = f"{len(cart)} tour(s) combined"
+
+    # =========================================================
+    #  CASO 2 — TU FLUJO ORIGINAL (INTACTO)
+    # =========================================================
+    else:
+        tour_id = int(request.form.get("tour_id"))
+        date = request.form.get("date")
+        people = int(request.form.get("people"))
+        email = request.form.get("email")
+        pickup = request.form.get("pickup")
+
+        # buscar tour real
+        tour = next((t for t in tours_data if t["id"] == tour_id), None)
+
+        if not tour:
+            return "Tour not found", 404
+
+        # precios dinámicos desde JSON
+        price_one = tour["pricing"]["one"]
+        price_group = tour["pricing"]["group"]
+
+        total = price_one if people == 1 else price_group * people
+
+        # pickup opcional
+        if pickup == "airport":
+            total += 49.99
+
+        reference_payload = json.dumps({
+            "tour_id": tour_id,
+            "date": date,
+            "people": people,
+            "email": email
+        })
+
+        nombre_producto = tour["name"]
+        descripcion_producto = f"{people} personas – {date}"
+
+    # =========================================================
+    #  TOKEN WOMPI (SIN CAMBIOS)
+    # =========================================================
     auth_response = requests.post(
         os.getenv("WOMPI_AUTH"),
         headers={"Content-Type": "application/x-www-form-urlencoded"},
@@ -240,15 +320,9 @@ def create_payment():
     if not access_token:
         return jsonify({"error": "No access_token", "details": token_data}), 400
 
-    #  referencia segura para guardar booking después
-    reference_payload = json.dumps({
-        "tour_id": tour_id,
-        "date": date,
-        "people": people,
-        "email": email
-    })
-
-    #  crear enlace de pago
+    # =========================================================
+    #  CREAR ENLACE WOMPI (MISMA ESTRUCTURA)
+    # =========================================================
     payment_response = requests.post(
         f"{os.getenv('WOMPI_API')}/EnlacePago",
         headers={
@@ -256,9 +330,9 @@ def create_payment():
             "Content-Type": "application/json"
         },
         json={
-            "nombreProducto": tour["name"],
-            "descripcionProducto": f"{people} personas – {date}",
-            "identificadorEnlaceComercio": f"tour-{tour_id}-{uuid.uuid4()}",
+            "nombreProducto": nombre_producto,
+            "descripcionProducto": descripcion_producto,
+            "identificadorEnlaceComercio": f"tour-{uuid.uuid4()}",
             "monto": round(total, 2),
             "moneda": "USD",
             "cantidadDisponible": 1,
@@ -298,28 +372,105 @@ def payment_success():
         if reference_data:
             pending = json.loads(reference_data)
 
-            booking = Booking(
-                tour_id=pending["tour_id"],
-                date=pending["date"],
-                people=pending["people"],
-                email=pending["email"]
-            )
-
-            db.session.add(booking)
-            db.session.commit()
-
-            # buscar nombre del tour
             tours_data = load_tours()
-            tour = next((t for t in tours_data if t["id"] == pending["tour_id"]), None)
 
-            return render_template(
-                "payment_success.html",
-                tour=tour,
-                booking=pending,
-                total=data["data"]["amount_in_cents"] / 100
-            )
+            # =================================================
+            #  CASO 1 — CARRITO (multi tours)
+            # =================================================
+            if "cart" in pending:
+
+                for item in pending["cart"]:
+                    booking = Booking(
+                        tour_id=item["tour_id"],
+                        date=item["date"],
+                        people=item["people"],
+                        email=pending["email"]
+                    )
+                    db.session.add(booking)
+
+                db.session.commit()
+
+                # ==============================
+                #  WhatsApp automático (carrito)
+                # ==============================
+                msg_lines = [
+                    "✅ NEW PAID BOOKING",
+                    ""
+                ]
+
+                for item in pending["cart"]:
+                    tour_name = next(
+                        (t["name"] for t in tours_data if t["id"] == item["tour_id"]),
+                        "Tour"
+                    )
+
+                    msg_lines.append(f"• {tour_name}")
+                    msg_lines.append(f"  📅 {item['date']}")
+                    msg_lines.append(f"  👥 {item['people']} people")
+                    msg_lines.append("")
+
+                msg_lines.append(
+                    f"💰 Total: ${data['data']['amount_in_cents']/100:.2f} USD"
+                )
+
+                send_whatsapp_notifications("\n".join(msg_lines))
+
+                return render_template(
+                    "payment_success.html",
+                    cart=pending["cart"],
+                    total=data["data"]["amount_in_cents"] / 100
+                )
+
+            # =================================================
+            #  CASO 2 — SINGLE TOUR
+            # =================================================
+            else:
+
+                booking = Booking(
+                    tour_id=pending["tour_id"],
+                    date=pending["date"],
+                    people=pending["people"],
+                    email=pending["email"]
+                )
+
+                db.session.add(booking)
+                db.session.commit()
+
+                # buscar nombre del tour
+                tour = next(
+                    (t for t in tours_data if t["id"] == pending["tour_id"]),
+                    None
+                )
+
+                # ==============================
+                #  WhatsApp automático (single)
+                # ==============================
+                tour_name = tour["name"] if tour else "Tour"
+
+                message = (
+                    "✅ NEW PAID BOOKING\n\n"
+                    f"🏔 Tour: {tour_name}\n"
+                    f"📅 Date: {pending['date']}\n"
+                    f"👥 People: {pending['people']}\n"
+                    f"📧 Email: {pending['email']}\n"
+                    f"💰 Total: ${data['data']['amount_in_cents']/100:.2f} USD"
+                )
+
+                send_whatsapp_notifications(message)
+
+                return render_template(
+                    "payment_success.html",
+                    tour=tour,
+                    booking=pending,
+                    total=data["data"]["amount_in_cents"] / 100
+                )
 
     return render_template("payment_success.html")
+
+
+@app.route("/cart") #ruta al carrito
+def cart_page():
+    return render_template("cart.html")
 
 
 @app.route("/wompi-webhook", methods=["POST"])

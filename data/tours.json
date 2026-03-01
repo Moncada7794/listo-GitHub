@@ -5,39 +5,44 @@
     "description": "Experience an unforgettable adventure hiking El Salvador’s highest and most iconic volcano, followed by relaxing time at the breathtaking Lake Coatepeque.",
     "image": "santa_ana.jpg",
     "pricing": { "one": 180, "group": 95 },
+
     "itinerary": [
       "🕕 6:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward Parque Nacional Cerro Verde.",
       "🕗 8:00 AM – Arrival and introductory briefing with local park guide.",
       "🥾 8:15 AM – Start of the hike to Volcán de Santa Ana (Ilamatepec).",
-      "🌋 10:00 AM – Arrival at the summit. Time to relax, enjoy a snack, explore the turquoise crater, and take breathtaking photos.",
+      "📸 10:00 AM – Arrival at the summit. Time to relax, enjoy a snack, explore the turquoise crater, and take breathtaking photos.",
       "⬇️ 10:30 AM – Begin descent.",
       "🍽️ 1:00 PM – Optional lunch at a lakeside restaurant at Lago de Coatepeque (not included). Optional activities available such as kayaking, boat rides, or jet skis.",
       "🚐 2:30 PM – Return to San Salvador.",
       "🏨 3:45 PM (approx.) – Hotel drop-off."
     ],
+
     "included": [
-      "✔ Private round-trip transportation",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Entrance fees to the national park",
-      "✔ Personalized assistance throughout the tour",
-      "✔ 4K drone photography (optional, no extra cost) 📸"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Entrance fees to the national park",
+      "✅ Personalized assistance throughout the tour",
+      "📸 4K drone photography (optional, no extra cost)"
     ],
+
     "not_included": [
-      "✖ Meals and beverages",
-      "✖ Optional water activities at the lake",
-      "✖ Gratuities (optional)"
+      "❌ Meals and beverages",
+      "❌ Optional water activities at the lake",
+      "❌ Gratuities (optional)"
     ]
   },
+
   {
     "id": 2,
     "name": "Joya de Cerén & San Andrés Private Tour 🏛️",
     "description": "Travel back in time and discover two of the most important Maya archaeological sites in El Salvador on this half-day cultural experience.",
     "image": "jceren.jpg",
     "pricing": { "one": 120, "group": 70 },
+
     "itinerary": [
       "🕖 7:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward the archaeological sites.",
-      "🕘 9:00 AM – Arrival at Joya de Cerén, a UNESCO World Heritage Site known as the “Pompeii of the Americas.”",
-      "🕤 9:15 AM – Guided tour of the remarkably preserved ancient Maya village buried by volcanic ash.",
+      "🏛️ 9:00 AM – Arrival at Joya de Cerén, a UNESCO World Heritage Site known as the 'Pompeii of the Americas.'",
+      "🧭 9:15 AM – Guided tour of the remarkably preserved ancient Maya village buried by volcanic ash.",
       "📸 10:30 AM – Free time for photos and exploration.",
       "🚐 11:30 AM – Transfer to San Andrés.",
       "🏛️ 12:00 PM – Guided visit of the ceremonial center, plazas, and main pyramid structures.",
@@ -45,78 +50,97 @@
       "🚐 2:30 PM – Return to San Salvador.",
       "🏨 3:30 PM (approx.) – Hotel drop-off."
     ],
+
     "included": [
-      "✔ Private round-trip transportation",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Entrance fees to both archaeological sites",
-      "✔ Personalized assistance throughout the tour",
-      "✔ Drone photography (optional, no extra cost) 📸"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Entrance fees to both archaeological sites",
+      "✅ Personalized assistance throughout the tour",
+      "📸 Drone photography (optional, no extra cost)"
     ],
+
     "not_included": [
-      "✖ Meals and beverages",
-      "✖ Gratuities (optional)"
+      "❌ Meals and beverages",
+      "❌ Gratuities (optional)"
     ]
   },
+
   {
     "id": 3,
-    "name": "Ruta de las Flores Private Tour 🌸",
-    "description": "Discover colorful towns, gastronomy, and mountain culture along El Salvador’s most charming route.",
+    "name": "Ruta de las Flores Full-Day Private Tour 🌺",
+    "description": "Discover colorful colonial towns, local gastronomy, artisan markets, and beautiful mountain landscapes along one of the most charming scenic routes in El Salvador.",
     "image": "rutadelasflores.jpg",
-    "pricing": { "one": 135, "group": 85 },
+    "pricing": { "one": 160, "group": 90 },
+
     "itinerary": [
-      "🕗 8:00 AM – Hotel pick-up (San Salvador)",
-      "🏘️ Visit picturesque colonial towns",
-      "☕ Coffee tasting experience",
-      "🍽️ Optional lunch stop (not included)",
-      "🌄 Scenic viewpoints and cultural exploration",
-      "🚐 Return to San Salvador"
+      "🕡 6:30 AM – Hotel pick-up (San Salvador) 🚐 Departure toward western El Salvador.",
+      "🏘️ 8:30 AM – Arrival in Nahuizalco. Walking tour around the central park and local market.",
+      "☕ 9:30 AM – Stop for artisan coffee and traditional breakfast (not included).",
+      "🌄 10:30 AM – Visit to Salcoatitán for a short walk through the town.",
+      "🌺 11:30 AM – Arrival in Juayúa. Free time to explore, take photos, and enjoy the colorful streets.",
+      "🍽️ 1:00 PM – Lunch at a local restaurant (not included).",
+      "🏞️ 2:30 PM – Visit to Apaneca or Concepción de Ataco. Optional stop at Café Albania, murals, viewpoints, and artisan shops.",
+      "🚐 4:00 PM – Return to San Salvador.",
+      "🏨 6:00 PM (approx.) – Hotel drop-off."
     ],
+
     "included": [
-      "✔ Private transportation",
-      "✔ Bilingual local guide (Spanish / English)"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Cultural walking tours in each town",
+      "✅ Personalized assistance throughout the tour",
+      "📸 Drone photo and video (optional)"
     ],
+
     "not_included": [
-      "✖ Meals and beverages"
+      "❌ Meals and beverages",
+      "❌ Gratuities (optional)"
     ]
   },
+
   {
     "id": 4,
     "name": "Turtle Release & Crocodile Watching Tour 🐢",
-    "description": "Ahuachapán | Nature & Wildlife Experience",
+    "description": "Nature and wildlife experience in Barra de Santiago with turtle conservation and crocodile observation.",
     "image": "barra-de-santiago.jpg",
     "pricing": { "one": 200, "group": 120 },
+
     "itinerary": [
       "🕕 6:00 AM – Hotel or Airbnb pick-up (San Salvador) 🚐",
-      "🐢 8:30 AM – Turtle release experience at a conservation site 🌱",
+      "🐢 8:30 AM – Turtle release experience at a conservation site",
       "🌿 10:30 AM – Arrival at Barra de Santiago Natural Reserve",
       "🚤 10:45 AM – Boat tour through the mangroves for crocodile and wildlife watching",
-      "🏖️ 11:30 AM – Free time at La Puntilla Barra de Santiago: swimming & relaxing 🌊",
+      "🏖️ 11:30 AM – Free time at La Puntilla Barra de Santiago: swimming & relaxing",
       "🍽️ 2:00 PM – Optional lunch local restaurant (not included)",
       "🚐 3:30 PM – Back to your hotel",
       "🏨 5:30 PM – Estimated arrival back at your hotel"
     ],
+
     "included": [
-      "✔ Private transportation (hotel pick-up & drop-off)",
-      "✔ Air-conditioned vehicle",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Boat tour for crocodile watching",
-      "✔ Personalized assistance",
-      "✔ 4K drone footage & video editing (weather & regulations permitting)"
+      "✅ Private transportation (hotel pick-up & drop-off)",
+      "✅ Air-conditioned vehicle",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Boat tour for crocodile watching",
+      "✅ Personalized assistance",
+      "📸 4K drone footage & video editing (weather & regulations permitting)"
     ],
+
     "not_included": [
-      "✖ Lunch & drinks",
-      "✖ Tips (optional)"
+      "❌ Lunch & drinks",
+      "❌ Tips (optional)"
     ]
   },
+
   {
     "id": 5,
     "name": "Taquillo Hiking & Sunset Park Private Tour 🌅",
-    "description": "Experience nature, coastal cliffs, and ocean views on this adventure combining hiking, breathtaking viewpoints, and relaxing time by the sea.",
+    "description": "Coastal cliffs, ocean viewpoints, hiking trails and relaxing sunset by the sea.",
     "image": "Taquillo.jpg",
     "pricing": { "one": 120, "group": 85 },
+
     "itinerary": [
       "🕗 8:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward the coast of La Libertad.",
-      "🕤 9:30 AM – Arrival at Parque Taquillo.",
+      "🕘 9:30 AM – Arrival at Parque Taquillo.",
       "🥾 9:45 AM – 3 km hiking experience through natural trails leading to spectacular cliff viewpoints overlooking the Pacific Ocean.",
       "📸 11:00 AM – Time to enjoy the viewpoint, relax, and take photos of the coastal cliffs.",
       "🚐 12:00 PM – Transfer to Sunset Park.",
@@ -125,129 +149,150 @@
       "🚐 3:30 PM – Return to San Salvador.",
       "🏨 4:30–5:00 PM (approx.) – Hotel drop-off."
     ],
+
     "included": [
-      "✔ Private round-trip transportation",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Entrance fees to Parque Taquillo",
-      "✔ Personalized assistance throughout the tour"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Entrance fees to Parque Taquillo",
+      "✅ Personalized assistance throughout the tour"
     ],
+
     "not_included": [
-      "✖ Meals and beverages",
-      "✖ Gratuities (optional)"
+      "❌ Meals and beverages",
+      "❌ Gratuities (optional)"
     ]
   },
+
   {
     "id": 6,
     "name": "Laguna de Alegría & Finca Rauda Adventure Tour 🌋",
-    "description": "An early departure to explore the beautiful eastern mountains of El Salvador, combining hiking, nature, adventure activities, and panoramic viewpoints — all in one unforgettable day.",
+    "description": "Hiking, panoramic viewpoints, nature activities and volcanic lagoon exploration in eastern El Salvador.",
     "image": "alegria.jpg",
     "pricing": { "one": 200, "group": 120 },
+
     "itinerary": [
       "🕔 5:00 AM – Hotel pick-up (San Salvador) 🚐",
-      "🕕 6:15 AM – Breakfast stop in San Rafael Cedros.",
-      "🕖 7:30 AM – Arrival in Alegría town, Usulután",
-      "🥾 7:35 AM – Hiking experience at Laguna de Alegría 🌋 Enjoy approximately 3 hours of hiking around the volcanic crater lagoon.",
+      "🍳 6:15 AM – Breakfast stop in San Rafael Cedros.",
+      "🏘️ 7:30 AM – Arrival in Alegría town, Usulután",
+      "🥾 7:35 AM – Hiking experience at Laguna de Alegría",
       "🚐 10:30 AM – Transfer to Finca Rauda",
-      "🍽️ 12:00 PM – Lunch and free time at Finca Rauda",
-      "🏞️ 2:00 PM – Visit to Mirador de las 100 Gradas",
+      "🍽️ 12:00 PM – Lunch and free time at Finca Rauda (not included)",
+      "📸 2:00 PM – Visit to Mirador de las 100 Gradas",
       "🚐 2:30 PM – Return to San Salvador",
       "🏨 5:00 PM (approx.) – Hotel drop-off"
     ],
+
     "included": [
-      "✔ Private round-trip transportation",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Entrance to Laguna de Alegría",
-      "✔ Personalized assistance throughout the tour"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Entrance to Laguna de Alegría",
+      "✅ Personalized assistance throughout the tour"
     ],
+
     "not_included": [
-      "✖ Breakfast, lunch, and beverages",
-      "✖ Attractions inside Finca Rauda (zip lines, go-karts, etc.)",
-      "✖ Gratuities (optional)"
+      "❌ Breakfast, lunch, and beverages",
+      "❌ Attractions inside Finca Rauda (zip lines, go-karts, etc.)",
+      "❌ Gratuities (optional)"
     ]
   },
+
   {
     "id": 7,
     "name": "All Archaeological Sites in One Full-Day Private Tour 🏛️",
     "description": "Discover the most important Maya archaeological sites in El Salvador in one comprehensive cultural experience.",
     "image": "archaeological.jpg",
     "pricing": { "one": 250, "group": 150 },
+
     "itinerary": [
-      "🕕 6:00 AM – Hotel pick-up (San Salvador) 🚐",
-      "🕢 7:30 AM – Stop for breakfast on the road.",
-      "🏛️ 8:50 AM – Arrival at Tazumal.",
+      "🕕 6:00 AM – Hotel pick-up (San Salvador) 🚐 Early departure toward western El Salvador.",
+      "🍳 7:30 AM – Stop for breakfast on the road.",
+      "🏛️ 8:50 AM – Arrival at Tazumal. Guided tour of the main pyramid, ceremonial platforms, and museum.",
       "🚐 10:00 AM – Departure to San Andrés.",
       "🏛️ 10:45 AM – Guided visit of the ceremonial center and plazas.",
       "🚐 11:30 AM – Transfer to Joya de Cerén.",
-      "🏛️ 11:45 AM – Guided tour of the preserved Maya village.",
+      "🏛️ 11:45 AM – Guided tour of the remarkably preserved Maya village buried by volcanic ash.",
       "🍽️ 1:00 PM – Optional lunch stop.",
-      "🏛️ 2:30 PM – Visit to Cihuatán.",
+      "🏛️ 2:30 PM – Visit to Cihuatán, the largest archaeological site in the country.",
       "🚐 3:30 PM – Return to San Salvador.",
       "🏨 5:30–6:00 PM (approx.) – Hotel drop-off."
     ],
+
     "included": [
-      "✔ Private round-trip transportation",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Entrance fees to all archaeological sites",
-      "✔ Personalized attention throughout the tour"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Entrance fees to all archaeological sites",
+      "✅ Personalized attention throughout the tour"
     ],
+
     "not_included": [
-      "✖ Meals and beverages",
-      "✖ Gratuities (optional)"
+      "❌ Meals and beverages",
+      "❌ Gratuities (optional)"
     ]
   },
+
   {
     "id": 8,
     "name": "Copán Ruins Full-Day Private Tour – Honduras 🇭🇳",
     "description": "Travel back in time and explore one of the most impressive Maya archaeological sites in Central America on this full-day international adventure from El Salvador.",
     "image": "copan.jpg",
     "pricing": { "one": 360, "group": 190 },
+
     "itinerary": [
-      "🕓 4:00 AM – Hotel pick-up (San Salvador) 🚐",
-      "🛂 7:30 AM – Border crossing (El Salvador – Honduras).",
-      "🏛️ 10:00 AM – Arrival at Copán Ruins.",
+      "🕓 4:00 AM – Hotel pick-up (San Salvador) 🚐 Early departure toward the Honduras border.",
+      "🛂 7:30 AM – Border crossing (El Salvador – Honduras). Assistance provided during the migration process.",
+      "🏛️ 10:00 AM – Arrival at Copán Ruinas.",
       "🏛️ 10:15 AM – Guided visit to Parque Arqueológico Copán.",
       "📸 12:30 PM – Free time for photos and exploration.",
       "🍽️ 1:30 PM – Optional lunch in Copán town (not included).",
-      "🚐 3:30 PM – Return to San Salvador.",
+      "🏘️ 2:30 PM – Free time to explore the charming colonial town and local artisan shops.",
+      "🚐 3:30 PM – Return to San Salvador with border stop.",
       "🏨 8:30–9:00 PM (approx.) – Hotel drop-off."
     ],
+
     "included": [
-      "✔ Private round-trip transportation",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Assistance at border crossing",
-      "✔ Entrance fees to the archaeological park",
-      "✔ Personalized attention throughout the tour"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Assistance at border crossing",
+      "✅ Entrance fees to the archaeological park",
+      "✅ Personalized attention throughout the tour"
     ],
+
     "not_included": [
-      "✖ Meals and beverages",
-      "✖ Passport fees or migration taxes (if applicable)",
-      "✖ Gratuities (optional)"
+      "❌ Meals and beverages",
+      "❌ Passport fees or migration taxes (if applicable)",
+      "❌ Gratuities (optional)"
     ]
   },
+
   {
     "id": 9,
-    "name": "Puerta del Diablo Private Hiking & Drone Tour 🎥",
-    "description": "Explore one of El Salvador’s most iconic natural landmarks, featuring scenic forest trails, dramatic rock formations, and breathtaking panoramic views — all captured with stunning 4K drone footage.",
+    "name": "Puerta del Diablo Private Hiking & Drone Tour 📸",
+    "description": "Explore one of El Salvador’s most iconic natural landmarks, featuring scenic forest trails, dramatic rock formations, and breathtaking panoramic views — all captured in stunning 4K drone footage.",
     "image": "puertadeldiablo.jpg",
     "pricing": { "one": 160, "group": 85 },
+
     "itinerary": [
-      "🕗 8:00 AM – Hotel pick-up (San Salvador) 🚐",
+      "🕗 8:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward La Puerta del Diablo.",
+      "🧭 9:00 AM – Arrival and welcome briefing with your local guide.",
       "🥾 9:15 AM – Guided hiking experience through natural trails.",
-      "🎥 Drone photo and video session at scenic viewpoints.",
+      "📸 11:00 AM – Drone photo and video session at the most scenic viewpoints.",
       "🍽️ 12:00 PM – Optional snack or picnic break (not included).",
+      "🌄 1:00 PM – Continue exploring iconic viewpoints and hidden spots.",
       "🚐 2:30 PM – Return to San Salvador.",
       "🏨 3:30 PM (approx.) – Hotel drop-off."
     ],
+
     "included": [
-      "✔ Private round-trip transportation",
-      "✔ Bilingual local guide (Spanish / English)",
-      "✔ Entrance fees",
-      "✔ 4K drone photos and videos (delivered digitally after the tour)",
-      "✔ Personalized assistance throughout the experience"
+      "✅ Private round-trip transportation",
+      "✅ Bilingual local guide (Spanish / English)",
+      "✅ Entrance fees",
+      "📸 4K drone photos and videos (delivered digitally after the tour)",
+      "✅ Personalized assistance throughout the experience"
     ],
+
     "not_included": [
-      "✖ Meals and beverages",
-      "✖ Gratuities (optional)"
+      "❌ Meals and beverages",
+      "❌ Gratuities (optional)"
     ]
   }
 ]

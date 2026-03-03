@@ -27,7 +27,9 @@ body{
 
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:space-between; /* ✅ FIX */
+
+    padding:0 24px; /* ✅ aire lateral */
 
     background:rgba(0,0,0,0.55);
     backdrop-filter:blur(8px);
@@ -35,10 +37,10 @@ body{
 }
 
 .header-left{
-    position:absolute;
-    left:24px;
+    position:static; /* ✅ FIX */
     font-weight:700;
     font-size:1.1rem;
+    white-space:nowrap;
 }
 
 .main-nav{
@@ -56,6 +58,41 @@ body{
 
 .main-nav a:hover{
     opacity:1;
+}
+
+
+/* ===== CART PRO (MEJORADO) ===== */
+
+.cart-icon{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.cart-icon a{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:white;
+    text-decoration:none;
+    font-size:.95rem;
+    padding:6px 10px;
+    border-radius:999px;
+    transition:.2s;
+}
+
+.cart-icon a:hover{
+    background:rgba(255,255,255,.08);
+}
+
+#cartCount{
+    background:#e53935;
+    padding:2px 7px;
+    border-radius:999px;
+    font-size:.75rem;
+    font-weight:700;
 }
 
 
@@ -322,89 +359,6 @@ body{
 }
 
 
-/* ===== NUEVO LAYOUT INFO + BOOKING LADO A LADO ===== */
-
-.tour-layout{
-    max-width:1200px;
-    margin:60px auto;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:40px;
-}
-
-.tour-info-card{
-    background:rgba(0,0,0,0.45);
-    backdrop-filter:blur(12px);
-    border-radius:18px;
-    padding:28px;
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-
-.tour-columns{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:24px;
-    margin-top:20px;
-}
-
-.tour-block h3{
-    margin-bottom:10px;
-    font-size:1.1rem;
-}
-
-.tour-block ul{
-    list-style:none;
-    padding-left:0;
-}
-
-.tour-block li{
-    margin-bottom:8px;
-    font-size:.95rem;
-    opacity:.9;
-}
-
-
-/* ================= BOOKING ================= */
-
-.booking-box{
-    position:sticky;
-    top:120px;
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:0 20px 60px rgba(0,0,0,.6);
-    padding:24px;
-    border-radius:16px;
-}
-
-.booking-box input,
-.booking-box select{
-    width:100%;
-    padding:10px;
-    margin:10px 0 16px;
-    border-radius:8px;
-    border:none;
-}
-
-.tour-btn.pay{
-    width:100%;
-    margin-bottom:10px;
-}
-
-.tour-btn.whatsapp{
-    width:100%;
-    background:#25D366;
-}
-
-.trust{
-    font-size:.85rem;
-    opacity:.7;
-    margin-top:12px;
-    text-align:center;
-}
-
-
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
@@ -423,60 +377,5 @@ body{
 
     .tour-hero{
         height:50vh;
-    }
-}
-
-/* ===== FIX HEADER OVERLAY MOBILE ===== */
-
-@media (max-width: 768px){
-
-    body{
-        padding-top: 80px;
-    }
-
-    .hero{
-        padding-top: 100px;
-    }
-
-    .tour-hero{
-        padding-top: 80px;
-    }
-
-}
-
-/* ===== HEADER MOBILE STABLE FIX ===== */
-
-@media (max-width: 768px){
-
-    .main-header{
-        height:auto;
-        padding:12px 16px;
-        flex-wrap:wrap;
-        justify-content:space-between;
-        row-gap:6px;
-    }
-
-    .header-left{
-        position:static;
-        font-size:.95rem;
-        white-space:nowrap;
-    }
-
-    .main-nav{
-        width:100%;
-        justify-content:center;
-        gap:14px;
-        margin-top:4px;
-        flex-wrap:wrap;
-    }
-
-    .main-nav a{
-        font-size:.85rem;
-        white-space:nowrap;
-    }
-
-    .cart-icon{
-        position:static;
-        white-space:nowrap;
     }
 }

@@ -11,13 +11,7 @@ html, body{
     overflow-x:hidden;
 }
 
-/* ================= HEADER ================= */
-
-html, body{
-    margin:0;
-    padding:0;
-    overflow-x:hidden;
-}
+/* ================= BODY ================= */
 
 body{
     font-family: Arial, sans-serif;
@@ -29,11 +23,11 @@ body{
 
     min-height:100vh;
 
-    /*  compensación exacta del header */
+    /* compensación header */
     padding-top:max(70px, env(safe-area-inset-top));
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 .main-header{
     position:fixed;
@@ -78,11 +72,12 @@ body{
     opacity:1;
 }
 
-/* CART */
+/* ================= CART ================= */
 
 .cart-icon{
-    position:relative; /*  ya NO absolute */
+    position:relative;
     font-weight:700;
+    white-space:nowrap;
 }
 
 .cart-icon a{
@@ -142,315 +137,45 @@ body{
     margin-bottom:26px;
 }
 
-
-/* ================= BOTÓN WHATSAPP ================= */
-
-.hero-actions{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:16px;
-}
-
-.btn-whatsapp{
-    display:inline-block;
-    padding:14px 34px;
-    border-radius:999px;
-    font-weight:700;
-    font-size:.95rem;
-    color:white;
-    text-decoration:none;
-
-    background:linear-gradient(135deg,#22c55e,#16a34a);
-    box-shadow:0 10px 28px rgba(34,197,94,.35);
-
-    transition:.25s;
-}
-
-.btn-whatsapp:hover{
-    transform:translateY(-2px);
-    box-shadow:0 14px 36px rgba(34,197,94,.45);
-}
-
-
-/* ================= REDES ================= */
-
-.hero-social{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    margin-top:6px;
-}
-
-.social{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:18px;
-    color:white;
-
-    transition:.25s;
-}
-
-.social-ig{
-    background:radial-gradient(circle at 30% 30%, #feda75, #d62976, #4f5bd5);
-}
-
-.social-fb{
-    background:#1877f2;
-}
-
-.social:hover{
-    transform:translateY(-2px);
-    box-shadow:0 6px 18px rgba(0,0,0,.35);
-}
-
-
-/* ================= HOME TOURS ================= */
-
-.home-tours-section{
-    margin-top:10px;
-    padding-bottom:80px;
-    display:flex;
-    justify-content:center;
-    background:none;
-}
-
-.home-tours-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:24px;
-    max-width:900px;
-    width:100%;
-    margin:0 auto;
-}
-
-.home-tour-card{
-    background:rgba(0,0,0,0.55);
-    backdrop-filter:blur(14px);
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 18px 48px rgba(0,0,0,.45);
-    transition:.25s;
-}
-
-.home-tour-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 25px 60px rgba(0,0,0,.6);
-}
-
-.tour-image{
-    height:170px;
-    background-size:cover;
-    background-position:center;
-}
-
-.tour-content{
-    padding:16px;
-    text-align:center;
-}
-
-.tour-name{
-    font-size:1.05rem;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.tour-description{
-    font-size:.9rem;
-    opacity:.85;
-    margin-bottom:14px;
-}
-
-.tour-btn{
-    padding:8px 20px;
-    background:#e53935;
-    color:white;
-    border-radius:999px;
-    text-decoration:none;
-    font-size:.85rem;
-    transition:.2s;
-}
-
-.tour-btn:hover{
-    background:#c62828;
-}
-
-
-/* ================= TOURS PAGE ================= */
-
-.tours-page{
-    padding-top:140px;
-    max-width:1200px;
-    margin:auto;
-}
-
-.tours-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:28px;
-}
-
-.tour-card{
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(12px);
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
-    transition:.3s;
-}
-
-.tour-card:hover{
-    transform:translateY(-10px) scale(1.02);
-}
-
-.tour-img{
-    height:220px;
-    background-size:cover;
-    background-position:center;
-}
-
-.tour-info{
-    padding:22px;
-}
-
-.tour-info h2{
-    font-size:1.3rem;
-    margin-bottom:10px;
-}
-
-.tour-meta{
-    font-size:.9rem;
-    opacity:.7;
-    margin-bottom:12px;
-}
-
-.tour-price{
-    font-size:1.1rem;
-    font-weight:700;
-    margin-bottom:16px;
-}
-
-
-/* ================= TOUR DETAIL ================= */
-
-.tour-hero{
-    position:relative;
-    height:65vh;
-    background-size:cover;
-    background-position:center;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.tour-hero h1,
-.tour-hero p{
-    color:#ffffff;
-    text-shadow:0 4px 18px rgba(0,0,0,.7);
-}
-
-.tour-hero-overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(to bottom, rgba(0,0,0,.3), rgba(0,0,0,.85));
-}
-
-
-/* ===== NUEVO LAYOUT INFO + BOOKING LADO A LADO ===== */
-
-.tour-layout{
-    max-width:1200px;
-    margin:60px auto;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:40px;
-}
-
-.tour-info-card{
-    background:rgba(0,0,0,0.45);
-    backdrop-filter:blur(12px);
-    border-radius:18px;
-    padding:28px;
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
-}
-
-.tour-columns{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:24px;
-    margin-top:20px;
-}
-
-.tour-block h3{
-    margin-bottom:10px;
-    font-size:1.1rem;
-}
-
-.tour-block ul{
-    list-style:none;
-    padding-left:0;
-}
-
-.tour-block li{
-    margin-bottom:8px;
-    font-size:.95rem;
-    opacity:.9;
-}
-
-
-/* ================= BOOKING ================= */
-
-.booking-box{
-    position:sticky;
-    top:120px;
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(14px);
-    border:1px solid rgba(255,255,255,.08);
-    box-shadow:0 20px 60px rgba(0,0,0,.6);
-    padding:24px;
-    border-radius:16px;
-}
-
-.booking-box input,
-.booking-box select{
-    width:100%;
-    padding:10px;
-    margin:10px 0 16px;
-    border-radius:8px;
-    border:none;
-}
-
-.tour-btn.pay{
-    width:100%;
-    margin-bottom:10px;
-}
-
-.tour-btn.whatsapp{
-    width:100%;
-    background:#25D366;
-}
-
-.trust{
-    font-size:.85rem;
-    opacity:.7;
-    margin-top:12px;
-    text-align:center;
-}
-
-
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
 
+    /* HEADER MOBILE PRO */
+    .main-header{
+        flex-wrap:wrap;
+        height:auto;
+        padding:10px 12px;
+        gap:6px;
+    }
+
+    .header-left{
+        order:1;
+        font-size:.95rem;
+    }
+
+    .cart-icon{
+        order:2;
+        font-size:.9rem;
+    }
+
+    .main-nav{
+        order:3;
+        width:100%;
+        justify-content:center;
+        gap:16px;
+        flex-wrap:wrap;
+        margin-top:6px;
+    }
+
+    .main-nav a{
+        font-size:.85rem;
+    }
+
+    /* HERO MOBILE */
     .hero-content h1{
         font-size:2.2rem;
+        line-height:1.2;
     }
 
     .home-tours-grid{
@@ -466,66 +191,26 @@ body{
     }
 }
 
-
-/* ================= Cart ================= */
-.cart-icon{
-    font-weight:700;
-    white-space:nowrap;
-}
-
-.cart-icon a{
-    color:white;
-    text-decoration:none;
-    font-size:.95rem;
-}
-
-#cartCount{
-    background:#e53935;
-    padding:2px 7px;
-    border-radius:999px;
-    font-size:.75rem;
-    margin-left:4px;
-}
-
-/* ================= MOBILE HEADER FIX ================= */
+/* ===== FIX GRID HOME MOBILE ===== */
 
 @media (max-width: 768px){
 
-    .main-header{
-        height:auto;
-        padding:12px 16px;
-        flex-wrap:wrap;
-        justify-content:space-between;
+    .home-tours-section{
+        padding: 0 14px 60px;
     }
 
-    .header-left{
-        position:static;
-        font-size:.95rem;
+    .home-tours-grid{
+        display:grid;
+        grid-template-columns:1fr; /* ← 1 card por fila en móvil */
+        gap:18px;
+        max-width:500px;
     }
 
-    .main-nav{
+    .home-tour-card{
         width:100%;
-        justify-content:center;
-        gap:16px;
-        margin-top:6px;
-        flex-wrap:wrap;
     }
 
-    .main-nav a{
-        font-size:.85rem;
-    }
-
-    .cart-icon{
-        position:static;
-        font-size:.9rem;
-    }
-}
-
-/* ===== HERO MOBILE TUNING ===== */
-
-@media (max-width: 768px){
-    .hero-content h1{
-        font-size:2.2rem;
-        line-height:1.2;
+    .tour-image{
+        height:180px;
     }
 }

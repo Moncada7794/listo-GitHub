@@ -221,7 +221,7 @@ def create_payment():
     tours_data = load_tours()
 
     # =====================================================
-    # 🛒 CASO 1 — PAGO DESDE CARRITO (MULTI-TOUR)
+    #  CASO 1 — PAGO DESDE CARRITO (MULTI-TOUR)
     # =====================================================
     cart_data = request.form.get("cart_data")
 
@@ -244,7 +244,7 @@ def create_payment():
         product_desc = f"{len(cart)} tours"
 
     # =====================================================
-    # 🎯 CASO 2 — PAGO INDIVIDUAL (TU FLUJO ACTUAL)
+    #  CASO 2 — PAGO INDIVIDUAL ( FLUJO ACTUAL)
     # =====================================================
     else:
         tour_id = int(request.form.get("tour_id"))
@@ -296,7 +296,7 @@ def create_payment():
         return jsonify({"error": "No access_token", "details": token_data}), 400
 
     # =====================================================
-    # 💳 CREAR LINK WOMPI
+    #  CREAR LINK WOMPI
     # =====================================================
     payment_response = requests.post(
         f"{os.getenv('WOMPI_API')}/EnlacePago",

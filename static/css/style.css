@@ -5,8 +5,22 @@
     box-sizing:border-box;
 }
 
+html, body{
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
+
+html, body{
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
+
 body{
-    font-family:Arial, sans-serif;
+    font-family: Arial, sans-serif;
     color:#fff;
 
     background:
@@ -14,32 +28,39 @@ body{
         url("/static/images/hero.jpg") center/cover fixed no-repeat;
 
     min-height:100vh;
+
+    /* 🔥 compensación exacta del header */
+    padding-top:max(70px, env(safe-area-inset-top));
 }
 
-
-/* ================= HEADER ================= */
+/* HEADER */
 
 .main-header{
     position:fixed;
     top:0;
+    left:0;
     width:100%;
     height:70px;
 
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:space-between; /*  IMPORTANTE */
+
+    padding:0 20px;
 
     background:rgba(0,0,0,0.55);
     backdrop-filter:blur(8px);
     z-index:1000;
 }
 
+/* LOGO */
+
 .header-left{
-    position:absolute;
-    left:24px;
     font-weight:700;
     font-size:1.1rem;
 }
+
+/* NAV */
 
 .main-nav{
     display:flex;
@@ -58,6 +79,26 @@ body{
     opacity:1;
 }
 
+/* CART */
+
+.cart-icon{
+    position:relative; /*  ya NO absolute */
+    font-weight:700;
+}
+
+.cart-icon a{
+    color:white;
+    text-decoration:none;
+    font-size:.95rem;
+}
+
+#cartCount{
+    background:#e53935;
+    padding:2px 7px;
+    border-radius:999px;
+    font-size:.75rem;
+    margin-left:4px;
+}
 
 /* ================= HERO HOME ================= */
 
@@ -426,28 +467,11 @@ body{
     }
 }
 
-/* ===== FIX HEADER OVERLAY MOBILE ===== */
-
-@media (max-width: 768px){
-
-    body{
-        padding-top: 80px;
-    }
-
-    .hero{
-        padding-top: 100px;
-    }
-
-    .tour-hero{
-        padding-top: 80px;
-    }
-
-}
 
 /* ================= Cart ================= */
 .cart-icon{
-    position:absolute;
-    right:24px;
+    margin-left:auto;
+    margin-right:24px;
     font-weight:700;
 }
 

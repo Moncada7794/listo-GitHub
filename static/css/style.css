@@ -443,3 +443,40 @@ body{
     }
 
 }
+
+/* ===== HEADER MOBILE STABLE FIX ===== */
+
+@media (max-width: 768px){
+
+    .main-header{
+        height:auto;
+        padding:12px 16px;
+        flex-wrap:wrap;
+        justify-content:space-between;
+        row-gap:6px;
+    }
+
+    .header-left{
+        position:static;
+        font-size:.95rem;
+        white-space:nowrap;
+    }
+
+    .main-nav{
+        width:100%;
+        justify-content:center;
+        gap:14px;
+        margin-top:4px;
+        flex-wrap:wrap;
+    }
+
+    .main-nav a{
+        font-size:.85rem;
+        white-space:nowrap;
+    }
+
+    .cart-icon{
+        position:static;
+        white-space:nowrap;
+    }
+}

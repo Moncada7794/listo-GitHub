@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "name": "Santa Ana Volcano & Lake Coatepeque Private Tour 🌋",
+    "name": "Santa Ana Volcano & Lake Coatepeque Private Tour ",
     "description": "Experience an unforgettable adventure hiking El Salvador’s highest and most iconic volcano, followed by relaxing time at the breathtaking Lake Coatepeque.",
     "image": "santa_ana.jpg",
     "pricing": { "one": 180, "group": 95 },
 
     "itinerary": [
-      "🕕 6:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward Parque Nacional Cerro Verde.",
+      "🕕 6:00 AM – Hotel pick-up (San Salvador)  Departure toward Parque Nacional Cerro Verde.",
       "🕗 8:00 AM – Arrival and introductory briefing with local park guide.",
       "🥾 8:15 AM – Start of the hike to Volcán de Santa Ana (Ilamatepec).",
       "📸 10:00 AM – Arrival at the summit. Time to relax, enjoy a snack, explore the turquoise crater, and take breathtaking photos.",
@@ -40,7 +40,7 @@
     "pricing": { "one": 120, "group": 70 },
 
     "itinerary": [
-      "🕖 7:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward the archaeological sites.",
+      "🕖 7:00 AM – Hotel pick-up (San Salvador)  Departure toward the archaeological sites.",
       "🏛️ 9:00 AM – Arrival at Joya de Cerén, a UNESCO World Heritage Site known as the 'Pompeii of the Americas.'",
       "🧭 9:15 AM – Guided tour of the remarkably preserved ancient Maya village buried by volcanic ash.",
       "📸 10:30 AM – Free time for photos and exploration.",
@@ -67,13 +67,13 @@
 
   {
     "id": 3,
-    "name": "Ruta de las Flores Full-Day Private Tour 🌺",
+    "name": "Ruta de las Flores Full-Day Private Tour ",
     "description": "Discover colorful colonial towns, local gastronomy, artisan markets, and beautiful mountain landscapes along one of the most charming scenic routes in El Salvador.",
     "image": "rutadelasflores.jpg",
     "pricing": { "one": 160, "group": 90 },
 
     "itinerary": [
-      "🕡 6:30 AM – Hotel pick-up (San Salvador) 🚐 Departure toward western El Salvador.",
+      "🕡 6:30 AM – Hotel pick-up (San Salvador)  Departure toward western El Salvador.",
       "🏘️ 8:30 AM – Arrival in Nahuizalco. Walking tour around the central park and local market.",
       "☕ 9:30 AM – Stop for artisan coffee and traditional breakfast (not included).",
       "🌄 10:30 AM – Visit to Salcoatitán for a short walk through the town.",
@@ -106,7 +106,7 @@
     "pricing": { "one": 200, "group": 120 },
 
     "itinerary": [
-      "🕕 6:00 AM – Hotel or Airbnb pick-up (San Salvador) 🚐",
+      "🕕 6:00 AM – Hotel or Airbnb pick-up (San Salvador) ",
       "🐢 8:30 AM – Turtle release experience at a conservation site",
       "🌿 10:30 AM – Arrival at Barra de Santiago Natural Reserve",
       "🚤 10:45 AM – Boat tour through the mangroves for crocodile and wildlife watching",
@@ -133,13 +133,13 @@
 
   {
     "id": 5,
-    "name": "Taquillo Hiking & Sunset Park Private Tour 🌅",
+    "name": "Taquillo Hiking & Sunset Park Private Tour ",
     "description": "Coastal cliffs, ocean viewpoints, hiking trails and relaxing sunset by the sea.",
     "image": "Taquillo.jpg",
     "pricing": { "one": 120, "group": 85 },
 
     "itinerary": [
-      "🕗 8:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward the coast of La Libertad.",
+      "🕗 8:00 AM – Hotel pick-up (San Salvador)  Departure toward the coast of La Libertad.",
       "🕘 9:30 AM – Arrival at Parque Taquillo.",
       "🥾 9:45 AM – 3 km hiking experience through natural trails leading to spectacular cliff viewpoints overlooking the Pacific Ocean.",
       "📸 11:00 AM – Time to enjoy the viewpoint, relax, and take photos of the coastal cliffs.",
@@ -165,7 +165,7 @@
 
   {
     "id": 6,
-    "name": "Laguna de Alegría & Finca Rauda Adventure Tour 🌋",
+    "name": "Laguna de Alegría & Finca Rauda Adventure Tour ",
     "description": "Hiking, panoramic viewpoints, nature activities and volcanic lagoon exploration in eastern El Salvador.",
     "image": "alegria.jpg",
     "pricing": { "one": 200, "group": 120 },
@@ -198,13 +198,13 @@
 
   {
     "id": 7,
-    "name": "All Archaeological Sites in One Full-Day Private Tour 🏛️",
+    "name": "All Archaeological Sites in One Full-Day Private Tour ",
     "description": "Discover the most important Maya archaeological sites in El Salvador in one comprehensive cultural experience.",
     "image": "archaeological.jpg",
     "pricing": { "one": 250, "group": 150 },
 
     "itinerary": [
-      "🕕 6:00 AM – Hotel pick-up (San Salvador) 🚐 Early departure toward western El Salvador.",
+      "🕕 6:00 AM – Hotel pick-up (San Salvador)  Early departure toward western El Salvador.",
       "🍳 7:30 AM – Stop for breakfast on the road.",
       "🏛️ 8:50 AM – Arrival at Tazumal. Guided tour of the main pyramid, ceremonial platforms, and museum.",
       "🚐 10:00 AM – Departure to San Andrés.",
@@ -238,7 +238,7 @@
     "pricing": { "one": 360, "group": 190 },
 
     "itinerary": [
-      "🕓 4:00 AM – Hotel pick-up (San Salvador) 🚐 Early departure toward the Honduras border.",
+      "🕓 4:00 AM – Hotel pick-up (San Salvador)  Early departure toward the Honduras border.",
       "🛂 7:30 AM – Border crossing (El Salvador – Honduras). Assistance provided during the migration process.",
       "🏛️ 10:00 AM – Arrival at Copán Ruinas.",
       "🏛️ 10:15 AM – Guided visit to Parque Arqueológico Copán.",
@@ -266,13 +266,13 @@
 
   {
     "id": 9,
-    "name": "Puerta del Diablo Private Hiking & Drone Tour 📸",
+    "name": "Puerta del Diablo Private Hiking & Drone Tour ",
     "description": "Explore one of El Salvador’s most iconic natural landmarks, featuring scenic forest trails, dramatic rock formations, and breathtaking panoramic views — all captured in stunning 4K drone footage.",
     "image": "puertadeldiablo.jpg",
     "pricing": { "one": 160, "group": 85 },
 
     "itinerary": [
-      "🕗 8:00 AM – Hotel pick-up (San Salvador) 🚐 Departure toward La Puerta del Diablo.",
+      "🕗 8:00 AM – Hotel pick-up (San Salvador)  Departure toward La Puerta del Diablo.",
       "🧭 9:00 AM – Arrival and welcome briefing with your local guide.",
       "🥾 9:15 AM – Guided hiking experience through natural trails.",
       "📸 11:00 AM – Drone photo and video session at the most scenic viewpoints.",

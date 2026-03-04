@@ -34,7 +34,7 @@
 
   {
     "id": 2,
-    "name": "Joya de Cerén & San Andrés Private Tour 🏛️",
+    "name": "Joya de Cerén & San Andrés Private Tour ",
     "description": "Travel back in time and discover two of the most important Maya archaeological sites in El Salvador on this half-day cultural experience.",
     "image": "jceren.jpg",
     "pricing": { "one": 120, "group": 70 },
@@ -100,7 +100,7 @@
 
   {
     "id": 4,
-    "name": "Turtle Release & Crocodile Watching Tour 🐢",
+    "name": "Turtle Release & Crocodile Watching Tour ",
     "description": "Nature and wildlife experience in Barra de Santiago with turtle conservation and crocodile observation.",
     "image": "barra-de-santiago.jpg",
     "pricing": { "one": 200, "group": 120 },

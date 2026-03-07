@@ -388,8 +388,9 @@ body{
     }
 
     .tour-layout{
-        grid-template-columns:1fr;
-    }
+    display:grid;
+    grid-template-columns:1fr;
+	}
 
     .tour-hero{
         height:50vh;
@@ -431,4 +432,23 @@ body{
         height:36px;
         background:rgba(255,255,255,0.1);
     }
+}
+
+/* ===== FIX TOUR DETAIL LAYOUT ===== */
+
+.tour-layout{
+    max-width:1200px;
+    margin:60px auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:40px;
+}
+
+.tour-info-card{
+    width:100%;
+}
+
+.booking-box{
+    width:100%;
 }

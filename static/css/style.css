@@ -472,3 +472,31 @@ body{
 .tour-layout{
     align-items:start;
 }
+
+/* ===== FIX BOOKING FORM LAYOUT ===== */
+
+.booking-box label{
+    display:block;
+    margin-top:10px;
+    margin-bottom:4px;
+    font-size:.9rem;
+}
+
+.booking-box input,
+.booking-box select{
+    width:100%;
+    padding:10px;
+    margin-bottom:14px;
+    border-radius:8px;
+    border:none;
+    display:block;
+}
+
+.booking-box .tour-btn{
+    width:100%;
+    margin-top:6px;
+}
+
+.booking-box .tour-btn.whatsapp{
+    background:#25D366;
+}

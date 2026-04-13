@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+<head>-
+<style>
+  .no-flash {
+    visibility: hidden;
+  }
+</style>    <meta charset="UTF-8">
     <title>{% block title %}Private Tours in El Salvador{% endblock %}</title>
 
 <meta name="description" content="{% block description %}Explore El Salvador with private tours, volcano hikes, beaches and more. Safe and personalized experiences.{% endblock %}">
@@ -53,6 +57,10 @@ function updateCartCount(){
     if(el) el.innerText = cart.length;
 }
 updateCartCount();
+
+window.addEventListener("load", () => {
+    document.body.style.visibility = "visible";
+  });
 </script>
 
 </body>

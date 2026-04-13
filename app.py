@@ -1,17 +1,11 @@
-```python
 import json, os, uuid
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, jsonify, redirect
 import requests
 
 load_dotenv()
-
 app = Flask(__name__)
 
-# =========================
-# ENV VARIABLES
-# =========================
-WOMPI_PUBLIC_KEY = os.getenv("WOMPI_PUBLIC_KEY")
 WOMPI_PRIVATE_KEY = os.getenv("WOMPI_PRIVATE_KEY")
 WOMPI_API = os.getenv("WOMPI_API")
 
@@ -34,26 +28,6 @@ def save_bookings(bookings):
         json.dump(bookings, f, indent=2)
 
 # =========================
-# WHATSAPP
-# =========================
-def send_whatsapp_notifications(message):
-    numbers = [
-        os.getenv("WHATSAPP_NUMBER_1"),
-        os.getenv("WHATSAPP_NUMBER_2")
-    ]
-
-    for number in numbers:
-        if number:
-            try:
-                requests.get(
-                    url="https://api.whatsapp.com/send",
-                    params={"phone": number, "text": message},
-                    timeout=5
-                )
-            except Exception as e:
-                print("WhatsApp error:", e)
-
-# =========================
 # ROUTES
 # =========================
 @app.route("/")
@@ -66,12 +40,9 @@ def tours():
 
 @app.route("/tours/<int:tour_id>")
 def tour_detail(tour_id):
-    tours_data = load_tours()
-    tour = next((t for t in tours_data if t["id"] == tour_id), None)
-
+    tour = next((t for t in load_tours() if t["id"] == tour_id), None)
     if not tour:
         return "Tour not found", 404
-
     return render_template("tour_detail.html", tour=tour)
 
 @app.route("/calendar")
@@ -101,7 +72,6 @@ def checkout():
 @app.route("/api/book", methods=['POST'])
 def book():
     data = request.json
-
     bookings = load_bookings()
 
     bookings.append({
@@ -112,7 +82,6 @@ def book():
     })
 
     save_bookings(bookings)
-
     return jsonify({"status": "ok"})
 
 @app.route("/api/bookings/<int:tour_id>")
@@ -135,34 +104,25 @@ def create_payment():
     tours_data = load_tours()
     cart_data = request.form.get("cart_data")
 
-    # MULTI TOUR
     if cart_data:
         cart = json.loads(cart_data)
         total = sum(item.get("price", 0) for item in cart)
 
         reference_payload = json.dumps({"cart": cart})
-        product_name = "Cotuza Tours – Multi-Tour Booking"
+        product_name = "Cotuza Tours"
         product_desc = f"{len(cart)} tours"
 
-    # SINGLE TOUR
     else:
         tour_id = int(request.form.get("tour_id"))
         date = request.form.get("date")
         people = int(request.form.get("people"))
         email = request.form.get("email")
-        pickup = request.form.get("pickup")
 
         tour = next((t for t in tours_data if t["id"] == tour_id), None)
         if not tour:
             return "Tour not found", 404
 
-        price_one = tour["pricing"]["one"]
-        price_group = tour["pricing"]["group"]
-
-        total = price_one if people == 1 else price_group * people
-
-        if pickup == "airport":
-            total += 49.99
+        total = tour["pricing"]["one"] if people == 1 else tour["pricing"]["group"] * people
 
         reference_payload = json.dumps({
             "tour_id": tour_id,
@@ -174,31 +134,20 @@ def create_payment():
         product_name = tour["name"]
         product_desc = f"{people} personas – {date}"
 
-    # TOKEN
-    auth_response = requests.post(
+    auth = requests.post(
         os.getenv("WOMPI_AUTH"),
-        headers={"Content-Type": "application/x-www-form-urlencoded"},
         data={
             "grant_type": "client_credentials",
             "client_id": os.getenv("WOMPI_CLIENT_ID"),
-            "client_secret": os.getenv("WOMPI_CLIENT_SECRET"),
-            "audience": "wompi_api"
+            "client_secret": os.getenv("WOMPI_CLIENT_SECRET")
         }
     )
 
-    token_data = auth_response.json()
-    access_token = token_data.get("access_token")
+    token = auth.json().get("access_token")
 
-    if not access_token:
-        return jsonify({"error": "No token"}), 400
-
-    # CREATE PAYMENT
-    payment_response = requests.post(
+    payment = requests.post(
         f"{WOMPI_API}/EnlacePago",
-        headers={
-            "Authorization": f"Bearer {access_token}",
-            "Content-Type": "application/json"
-        },
+        headers={"Authorization": f"Bearer {token}"},
         json={
             "nombreProducto": product_name,
             "descripcionProducto": product_desc,
@@ -207,17 +156,14 @@ def create_payment():
             "moneda": "USD",
             "cantidadDisponible": 1,
             "referencia": reference_payload,
-            "vigencia": {"tipo": "MINUTOS", "valor": 1440},
             "urlRedirect": "https://hikingelsalvador.com/payment-success"
         }
     )
 
-    url_pago = payment_response.json().get("urlEnlace")
-
-    return redirect(url_pago)
+    return redirect(payment.json().get("urlEnlace"))
 
 # =========================
-# PAYMENT SUCCESS
+# SUCCESS
 # =========================
 @app.route("/payment-success")
 def payment_success():
@@ -227,47 +173,25 @@ def payment_success():
     if not transaction_id:
         return render_template("payment_success.html")
 
-    headers = {"Authorization": f"Bearer {WOMPI_PRIVATE_KEY}"}
+    r = requests.get(
+        f"{WOMPI_API}/transactions/{transaction_id}",
+        headers={"Authorization": f"Bearer {WOMPI_PRIVATE_KEY}"}
+    )
 
-    r = requests.get(f"{WOMPI_API}/transactions/{transaction_id}", headers=headers)
     data = r.json()
 
     if data.get("data", {}).get("status") == "APPROVED":
 
-        reference_data = data["data"].get("reference")
+        pending = json.loads(data["data"]["reference"])
+        bookings = load_bookings()
 
-        if reference_data:
-            pending = json.loads(reference_data)
-            bookings = load_bookings()
+        if "cart" in pending:
+            for item in pending["cart"]:
+                bookings.append(item)
+        else:
+            bookings.append(pending)
 
-            # CART
-            if "cart" in pending:
-                for item in pending["cart"]:
-                    bookings.append({
-                        "tour_id": item["tour_id"],
-                        "date": item["date"],
-                        "people": item["people"],
-                        "email": pending["email"]
-                    })
-
-            # SINGLE
-            else:
-                bookings.append({
-                    "tour_id": pending["tour_id"],
-                    "date": pending["date"],
-                    "people": pending["people"],
-                    "email": pending["email"]
-                })
-
-            save_bookings(bookings)
-
-            send_whatsapp_notifications("✅ NEW PAID BOOKING")
+        save_bookings(bookings)
 
     return render_template("payment_success.html")
 
-# =========================
-# RUN
-# =========================
-if __name__ == "__main__":
-    app.run(debug=True)
-```

@@ -1,9 +1,15 @@
+{% block title %}All Tours in El Salvador | Private Experiences{% endblock %}
+
+{% block description %}
+Browse all private tours in El Salvador. Volcano hikes, Ruta de las Flores, beaches and more.
+{% endblock %}
+
 {% extends "base.html" %}
 {% block content %}
 
 <section class="tours-page">
 
-    <h1 class="tours-hero-title">All Tours in El Salvador</h1>
+    <h1 class="tours-hero-title">Private Tours in El Salvador</h1>
 
     <div class="tours-grid">
 
@@ -15,7 +21,7 @@
             </div>
 
             <div class="tour-info">
-                <h2>{{ tour.name }}</h2>
+                <h2>{{ tour.name }} Tour</h2>
 
               
                <p class="tour-price">

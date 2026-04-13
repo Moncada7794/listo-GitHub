@@ -541,3 +541,16 @@ body{
     }
 
 }
+.hero-content p{
+    max-width:700px;
+    margin:0 auto;
+    line-height:1.6;
+}
+
+/* ===== SEO TEXT IMPROVEMENT (SAFE) ===== */
+
+.hero-content p{
+    max-width:700px;
+    margin:0 auto;
+    line-height:1.6;
+}

@@ -1,3 +1,9 @@
+{% block title %}{{ tour.name }} | Private Tour in El Salvador{% endblock %}
+
+{% block description %}
+{{ tour.name }} in El Salvador. {{ tour.description }} Private guide, transport included. Book now.
+{% endblock %}
+
 {% extends "base.html" %}
 {% block content %}
 
@@ -6,8 +12,12 @@ style="background-image:url('{{ url_for('static', filename='images/' ~ tour.imag
     <div class="tour-hero-overlay"></div>
 
     <div class="hero-content">
-        <h1>{{ tour.name }}</h1>
-        <p>{{ tour.description }}</p>
+        <<h1>{{ tour.name }} in El Salvador</h1>
+        <p style="max-width:700px; margin:auto;">
+Experience the {{ tour.name }} in El Salvador. {{ tour.description }}
+Enjoy a private guided tour with safe transportation, flexible schedule
+and local insights.
+</p>
     </div>
 </section>
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hiking El Salvador</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Private Tours in El Salvador{% endblock %}</title>
+
+<meta name="description" content="{% block description %}Explore El Salvador with private tours, volcano hikes, beaches and more. Safe and personalized experiences.{% endblock %}">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <link rel="stylesheet"

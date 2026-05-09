@@ -820,3 +820,25 @@ img{
     }
 
 }
+/* ===== FINAL MOBILE OVERRIDE ===== */
+
+@media screen and (max-width: 768px){
+
+    .home-tours-grid{
+        display:flex !important;
+        flex-direction:column !important;
+        width:100% !important;
+        max-width:100% !important;
+        gap:20px !important;
+    }
+
+    .home-tour-card{
+        width:100% !important;
+    }
+
+    .tour-card-link{
+        width:100% !important;
+        display:block !important;
+    }
+
+}

@@ -2,19 +2,27 @@
 <html lang="en">
 <head>
 
+<!-- 1. Fondo para evitar flash blanco -->
 <style>
   html, body {
     background-color: #0b0f14;
   }
 </style>
 
+<!-- 2. Meta -->
 <meta charset="UTF-8">
 
 <title>{% block title %}Private Tours in El Salvador{% endblock %}</title>
 
-<meta name="description" content="{% block description %}Explore El Salvador with private tours, volcano hikes, beaches and more. Safe and personalized experiences.{% endblock %}">
+<meta name="description" content="{% block description %}Explore El Salvador with private tours, volcano hikes, beaches and more.{% endblock %}">
 
+<!-- 3. PRELOAD (primero) -->
+<link rel="preload" href="{{ url_for('static', filename='css/style.css') }}" as="style">
+
+<!-- 4. CSS normal (después) -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- 5. Otros CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>

@@ -2,35 +2,79 @@
 <html lang="en">
 <head>
 
-<!-- 1. Fondo para evitar flash blanco -->
-<style>
-  html, body {
-    background-color: #0b0f14;
-  }
-</style>
+    <!-- ================= META ================= -->
 
-<!-- 2. Meta -->
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<title>{% block title %}Private Tours in El Salvador{% endblock %}</title>
+    <!-- 🔥 ESTA ERA LA PARTE QUE FALTABA -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="{% block description %}Explore El Salvador with private tours, volcano hikes, beaches and more.{% endblock %}">
+    <title>
+        {% block title %}
+            Private Tours in El Salvador
+        {% endblock %}
+    </title>
 
-<!-- 3. PRELOAD (primero) -->
-<link rel="preload" href="{{ url_for('static', filename='css/style.css') }}" as="style">
+    <meta
+        name="description"
+        content="{% block description %}Explore El Salvador with private tours, volcano hikes, beaches and more.{% endblock %}"
+    >
 
-<!-- 4. CSS normal (después) -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta
+        name="keywords"
+        content="El Salvador tours, private tours El Salvador, volcano hikes, Santa Ana volcano, Ruta de las Flores"
+    >
 
-<!-- 5. Otros CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#0b0f14">
+
+    <!-- ================= PREVENT WHITE FLASH ================= -->
+
+    <style>
+        html,
+        body{
+            background-color:#0b0f14;
+            margin:0;
+            padding:0;
+            overflow-x:hidden;
+        }
+
+        body{
+            visibility:visible;
+        }
+    </style>
+
+    <!-- ================= PRELOAD CSS ================= -->
+
+    <link
+        rel="preload"
+        href="{{ url_for('static', filename='css/style.css') }}"
+        as="style"
+    >
+
+    <!-- ================= MAIN CSS ================= -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <!-- ================= FONT AWESOME ================= -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    >
 
 </head>
 
 <body>
 
-<!-- TOP BAR -->
+<!-- ================= HEADER ================= -->
+
 <header class="main-header">
+
     <div class="header-left">
         Hiking El Salvador
     </div>
@@ -41,38 +85,65 @@
         <a href="/calendar">Availability</a>
         <a href="/gallery">Gallery</a>
     </nav>
-<div class="cart-icon">
-    <a href="/cart">
-        🛒 <span id="cartCount">0</span>
-    </a>
-</div>
+
+    <div class="cart-icon">
+        <a href="/cart">
+            🛒
+            <span id="cartCount">0</span>
+        </a>
+    </div>
 
 </header>
-<!-- PAGE CONTENT -->
+
+<!-- ================= PAGE CONTENT ================= -->
+
 <main>
     {% block content %}{% endblock %}
 </main>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
+
 <footer class="main-footer">
-    <p>© 2026 Hiking El Salvador · El Salvador</p>
+
     <p>
-        <a href="https://wa.me/50361116916" target="_blank">
+        © 2026 Hiking El Salvador · El Salvador
+    </p>
+
+    <p>
+        <a
+            href="https://wa.me/50361116916"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
             📲 Book via WhatsApp
         </a>
     </p>
+
 </footer>
+
+<!-- ================= JS ================= -->
+
 <script>
+
 function updateCartCount(){
-    const cart = JSON.parse(sessionStorage.getItem("cart") || "[]");
+
+    const cart = JSON.parse(
+        sessionStorage.getItem("cart") || "[]"
+    );
+
     const el = document.getElementById("cartCount");
-    if(el) el.innerText = cart.length;
+
+    if(el){
+        el.innerText = cart.length;
+    }
 }
+
 updateCartCount();
 
 window.addEventListener("load", () => {
     document.body.style.visibility = "visible";
-  });
+});
+
 </script>
 
 </body>

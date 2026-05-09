@@ -785,3 +785,38 @@ img{
         height:200px;
     }
 }
+
+/* ===================================================== */
+/* ===== FORCE MOBILE LIST VIEW ======================== */
+/* ===================================================== */
+
+@media (max-width:768px){
+
+    .home-tours-grid,
+    .tours-grid{
+        display:grid !important;
+        grid-template-columns:1fr !important;
+        gap:20px !important;
+
+        width:100%;
+        max-width:100%;
+    }
+
+    .home-tour-card,
+    .tour-card,
+    .tour-card-link{
+        width:100% !important;
+    }
+
+    .home-tours-section,
+    .tours-page{
+        padding-left:16px;
+        padding-right:16px;
+    }
+
+    .tour-image,
+    .tour-img{
+        height:220px;
+    }
+
+}
